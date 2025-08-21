@@ -106,6 +106,19 @@ def extract_paragraph_text(el: Dict) -> str:
     return "".join(parts).strip()
 
 
+## MODIFICATION: New helper function to extract all text from a table cell.
+def extract_cell_text(cell: Dict) -> str:
+    """Extracts all text from a single table cell."""
+    if not cell or "content" not in cell:
+        return ""
+    
+    cell_parts = []
+    for content_element in cell.get("content", []):
+        cell_parts.append(extract_paragraph_text(content_element))
+        
+    return "".join(cell_parts).strip()
+
+
 def find_tables_with_context(doc: Dict) -> List[Dict]:
     out = []
     content = doc.get("body", {}).get("content", [])
@@ -122,15 +135,10 @@ def find_tables_with_context(doc: Dict) -> List[Dict]:
 
 
 def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
-    # Enhanced matching using heading hierarchy. The function expects tables
-    # to appear under a HEADING_1 (e.g. 'CHUONG 2'), then HEADING_2 (e.g. '2. Bai tap')
-    # and HEADING_3 (e.g. 'a. codeptit'). The `section_name` env var may provide
-    # a path like 'CHUONG 2 > Bai tap > codeptit' (parts separated by >,|,->,/).
     content = doc.get("body", {}).get("content", [])
     tables = []
     for i, el in enumerate(content):
         if "table" in el:
-            # Walk backwards to find nearest heading 3,2,1 texts
             h1 = h2 = h3 = ""
             for j in range(i - 1, max(i - 100, -1), -1):
                 c = content[j]
@@ -147,7 +155,6 @@ def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
                     h2 = txt
                 elif named == "HEADING_1" and not h1:
                     h1 = txt
-                # If we've collected all three, stop early
                 if h1 and h2 and h3:
                     break
             ctx = " ".join(x for x in (h1, h2, h3) if x)
@@ -156,17 +163,14 @@ def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
     def normalize(s: str) -> str:
         return re.sub(r"[^0-9a-z]+", " ", (s or "").lower()).strip()
 
-    # Split section_name into parts by common separators
     parts = [p.strip() for p in re.split(r">|\||->|/", (section_name or "")) if p.strip()]
     parts = [normalize(p) for p in parts]
 
-    # Try to match by hierarchy: h1, h2, h3 depending on how many parts provided
     for t in tables:
         nh1 = normalize(t.get("h1", ""))
         nh2 = normalize(t.get("h2", ""))
         nh3 = normalize(t.get("h3", ""))
         if len(parts) == 0:
-            # no target specified, skip
             continue
         if len(parts) == 1:
             if parts[0] and parts[0] in nh1:
@@ -178,7 +182,6 @@ def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
             if parts[0] and parts[0] in nh1 and parts[1] and parts[1] in nh2 and parts[2] and parts[2] in nh3:
                 return t
 
-    # If not matched, try numeric chapter match (e.g., '2' in 'CHUONG 2')
     m = re.search(r"\d+", section_name or "")
     if m:
         num = m.group(0)
@@ -186,7 +189,6 @@ def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
             if re.search(rf"\b{re.escape(num)}\b", t.get("h1", "")):
                 return t
 
-    # final fallback: if DRY_RUN print available contexts to help debugging
     if tables and DRY_RUN:
         print("[docs debug] no exact heading match; available table headings:")
         for t in tables:
@@ -195,8 +197,41 @@ def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
     return tables[0] if tables else None
 
 
+## MODIFICATION: New function to read the Doc and get existing submission IDs.
+def get_existing_submission_ids(docs_service, doc_id: str, section: str) -> set:
+    """Reads a table in a Google Doc and returns a set of Submission IDs from the first column."""
+    if not doc_id:
+        return set()
+    try:
+        doc = docs_service.documents().get(documentId=doc_id).execute()
+        table_info = choose_table_by_section(doc, section)
+
+        if not table_info:
+            print(f"[docs warning] Could not find table for section '{section}'. Assuming no existing submissions.")
+            return set()
+
+        table = table_info.get("element", {}).get("table", {})
+        table_rows = table.get("tableRows", [])
+        
+        existing_ids = set()
+        # Start from index 1 to skip a potential header row
+        for row in table_rows[1:]:
+            cells = row.get("tableCells", [])
+            if not cells:
+                continue
+            
+            # Submission ID is assumed to be in the first cell
+            first_cell = cells[0]
+            submission_id = extract_cell_text(first_cell)
+            if submission_id.isdigit():
+                existing_ids.add(submission_id)
+        return existing_ids
+    except Exception as e:
+        print(f"[docs error] Failed to get existing submission IDs: {e}")
+        return set()
+
+
 def append_rows_and_fill_docs(doc_id: str, docs_service, table_element: Dict, rows_data: List[List[str]]):
-    # Adapted from test script logic
     table = table_element.get("element", {}).get("table")
     if not table:
         print("[docs] table element missing")
@@ -212,21 +247,19 @@ def append_rows_and_fill_docs(doc_id: str, docs_service, table_element: Dict, ro
     if num_to_add == 0: 
         return True
 
-    requests = []
+    requests_payload = []
     for _ in range(num_to_add):
-        requests.append({
+        requests_payload.append({
             "insertTableRow": {
                 "tableCellLocation": {"tableStartLocation": {"index": start_index}, "rowIndex": old_row_count - 1},
                 "insertBelow": True,
             }
         })
 
-    docs_service.documents().batchUpdate(documentId=doc_id, body={"requests": requests}).execute()
+    docs_service.documents().batchUpdate(documentId=doc_id, body={"requests": requests_payload}).execute()
     time.sleep(0.34)
 
     doc2 = docs_service.documents().get(documentId=doc_id).execute()
-    # Re-select the target table by the configured DOC_SECTION to avoid
-    # accidentally matching nearby paragraph text from a different section.
     table2 = choose_table_by_section(doc2, DOC_SECTION)
     if not table2:
         print("[docs] table disappeared after insert")
@@ -274,7 +307,7 @@ def append_rows_and_fill_docs(doc_id: str, docs_service, table_element: Dict, ro
         for i in range(0, len(insert_requests), 50):
             chunk = insert_requests[i : i + 50]
             docs_service.documents().batchUpdate(documentId=doc_id, body={"requests": chunk}).execute()
-        print(f"[docs] Filled {len(insert_requests)} cells")
+        print(f"[docs] Filled {len(rows_data)} new cells")
     return True
 
 
@@ -298,7 +331,6 @@ def parse_cookie_string(s: str):
 def pick_text(el):
     if not el:
         return ""
-    # Prefer link text if available
     a = el.find("a")
     return (a.get_text(" ", strip=True) if a else el.get_text(" ", strip=True)).strip()
 
@@ -310,7 +342,6 @@ def try_parse_time(s):
             return datetime.strptime(s, fmt)
         except ValueError:
             continue
-    # Fallback: try to extract ISO-like datetime
     m = re.search(r"\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}", s)
     if m:
         try:
@@ -334,7 +365,6 @@ def fetch_page(session: requests.Session, url: str):
 
 
 def make_page_url(base_url, page_index):
-    # Append or replace the page query param
     parts = list(urllib.parse.urlparse(base_url))
     qs = urllib.parse.parse_qs(parts[4])
     qs[PAGE_PARAM] = [str(page_index)]
@@ -346,7 +376,6 @@ def parse_rows(html: str):
     soup = BeautifulSoup(html, "html.parser")
     rows = soup.select(ROW_SELECTOR)
     out = []
-    # Skip header-like rows if they have <th>
     for row in rows:
         if row.find_all(["th"]):
             continue
@@ -357,7 +386,6 @@ def parse_rows(html: str):
             prob_cell = row.select_one(PROBLEM_CELL_SELECTOR) if PROBLEM_CELL_SELECTOR else None
             res_cell = row.select_one(RESULT_CELL_SELECTOR) if RESULT_CELL_SELECTOR else None
         else:
-            # td index approach
             tds = row.find_all("td")
             if not tds:
                 continue
@@ -365,7 +393,6 @@ def parse_rows(html: str):
                 idx = [int(x.strip()) for x in COL_INDEXES.split(",")]
             except Exception:
                 idx = [0,1,2,3,4,5,6]
-            # guard
             if max(idx) >= len(tds):
                 continue
             id_cell, time_cell, prob_cell, res_cell, compiler_cell = (tds[idx[0]], tds[idx[1]], tds[idx[2]], tds[idx[3]], tds[idx[6]])
@@ -376,14 +403,12 @@ def parse_rows(html: str):
         res_text = pick_text(res_cell)
         compiler_text = pick_text(compiler_cell)
 
-        # Problem URL if any
         prob_url = None
         if prob_cell:
             a = prob_cell.select_one(PROBLEM_LINK_SELECTOR) or prob_cell.find("a")
             if a and a.has_attr("href"):
                 prob_url = urllib.parse.urljoin(LIST_URL, a["href"])
 
-        # Skip empty rows
         if not sid and not prob_text:
             continue
 
@@ -397,20 +422,24 @@ def parse_rows(html: str):
         })
     return out
 
-# The script now focuses on scraping and optional Google Docs sync. 
-# Use DRY_RUN=true to preview rows instead of modifying the Doc.
 
+## MODIFICATION: The main sync function is rewritten to support de-duplication.
 def sync():
     if not LIST_URL:
         die("LIST_URL is empty")
     session = build_session()
     docs = None
+    existing_ids = set()
+
     if ENABLE_DOCS:
         if not GOOGLE_DOC_ID:
             die("ENABLE_DOCS is true but GOOGLE_DOC_ID is empty")
         docs = get_docs_service()
+        print("[docs] Fetching existing submission IDs to prevent duplicates...")
+        existing_ids = get_existing_submission_ids(docs, GOOGLE_DOC_ID, DOC_SECTION)
+        print(f"[docs] Found {len(existing_ids)} existing submissions in the document.")
 
-    total = 0
+    new_rows_to_add = []
     pages = [LIST_URL]
 
     if ENABLE_PAGINATION and MAX_PAGES > 1:
@@ -422,26 +451,22 @@ def sync():
         rows = parse_rows(html)
         print(f"[parse] found {len(rows)} rows")
         for item in rows:
-            # validate
             sid = (item.get("id") or "").strip()
             if not sid:
                 continue
-            try:
-                isCompilerJava = (item.get("compiler", "").strip().lower() == "java")
-            except Exception:
-                isCompilerJava = False
+            
+            # The core logic change: skip if this ID has already been synced.
+            if sid in existing_ids:
+                continue
+
             res = (item.get("result") or "").strip()
+            isCompilerJava = (item.get("compiler", "").strip().lower() == "java")
 
             if res == "AC" and isCompilerJava:
-                total += 1
-                # Format date to dd-mm-yyyy if available
                 dt = try_parse_time(item.get("time_text") or "")
-                if dt:
-                    time_text = dt.strftime("%d-%m-%Y")
-                else:
-                    time_text = item.get("time_text") or ""
+                time_text = dt.strftime("%d-%m-%Y") if dt else (item.get("time_text") or "")
 
-                row = [
+                row_data = [
                     sid,
                     time_text,
                     item.get("problem"),
@@ -449,19 +474,34 @@ def sync():
                     item.get("problem_url") or "",
                     item.get("compiler") or "",
                 ]
+                
+                # Add the new row to a temporary list.
+                new_rows_to_add.append(row_data)
+                # Add the ID to our set to avoid duplicates if it appears again in the same run.
+                existing_ids.add(sid)
 
-                if DRY_RUN or not ENABLE_DOCS:
-                    print("[dry-run] would append:", row)
+    print(f"[sync] Found {len(new_rows_to_add)} new submissions to add.")
+
+    # After checking all pages, add all new rows in a single batch operation.
+    if new_rows_to_add:
+        # Reverse the list so the newest submissions are added first.
+        new_rows_to_add.reverse()
+        if DRY_RUN or not ENABLE_DOCS:
+            for row in new_rows_to_add:
+                print("[dry-run] would append:", row)
+        else:
+            try:
+                print(f"[docs] Appending {len(new_rows_to_add)} rows to the table...")
+                doc = docs.documents().get(documentId=GOOGLE_DOC_ID).execute()
+                table_info = choose_table_by_section(doc, DOC_SECTION)
+                if table_info:
+                    append_rows_and_fill_docs(GOOGLE_DOC_ID, docs, table_info, new_rows_to_add)
                 else:
-                    try:
-                        doc = docs.documents().get(documentId=GOOGLE_DOC_ID).execute()
-                        table_info = choose_table_by_section(doc, DOC_SECTION)
-                        if table_info:
-                            append_rows_and_fill_docs(GOOGLE_DOC_ID, docs, table_info, [row])
-                    except Exception as e:
-                        print(f"[docs error] failed to append row for {sid}: {e}")
+                    print(f"[docs error] Could not find the target table section '{DOC_SECTION}'.")
+            except Exception as e:
+                print(f"[docs error] failed to append rows: {e}")
 
-    print(f"[done] processed {total} rows")
+    print(f"[done] Processed {len(new_rows_to_add)} new submissions.")
 
 
 if __name__ == "__main__":
