@@ -27,6 +27,8 @@ Usage
 """
 
 import os, time, re, json, urllib.parse, requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -39,10 +41,17 @@ load_dotenv()
 NOTION_API_KEY = os.getenv("NOTION_API_KEY", "").strip()
 NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID", "").strip()
 
-# Site config
 LIST_URL = os.getenv("LIST_URL", "").strip()
 COOKIE_STRING = os.getenv("COOKIE_STRING", "").strip()  # "k1=v1; k2=v2"
 USER_AGENT = os.getenv("USER_AGENT", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36").strip()
+# Selenium login variables
+AUTO_LOGIN = os.getenv("AUTO_LOGIN", "false").lower() in ("1", "true", "yes", "y")
+LOGIN_URL = os.getenv("LOGIN_URL", "").strip()
+LOGIN_USERNAME = os.getenv("LOGIN_USERNAME", "").strip()
+LOGIN_PASSWORD = os.getenv("LOGIN_PASSWORD", "").strip()
+USERNAME_SELECTOR = os.getenv("USERNAME_SELECTOR", "").strip()
+PASSWORD_SELECTOR = os.getenv("PASSWORD_SELECTOR", "").strip()
+SUBMIT_SELECTOR = os.getenv("SUBMIT_SELECTOR", "").strip()
 
 # Scraper selectors
 # By default, we assume a <table> with <tr> for rows and <td> columns in order: ID, time, problem, result.
@@ -63,7 +72,7 @@ PAGE_PARAM = os.getenv("PAGE_PARAM", "page").strip()  # e.g., "page"
 MAX_PAGES = int(os.getenv("MAX_PAGES", "1"))
 
 # Safety / performance
-NOTION_RATE_DELAY = float(os.getenv("NOTION_RATE_DELAY", "0.5"))  # seconds between Notion writes
+NOTION_RATE_DELAY = float(os.getenv("NOTION_RATE_DELAY", "0"))  # seconds between Notion writes
 TIME_FORMATS = [
     "%Y-%m-%d %H:%M:%S",
     "%Y/%m/%d %H:%M:%S",
@@ -113,10 +122,37 @@ def try_parse_time(s):
     return None
 
 
+def get_cookie_string_auto():
+    try:
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')
+        driver = webdriver.Chrome(options=options)
+        driver.get(LOGIN_URL)
+        time.sleep(2)
+        driver.find_element(By.CSS_SELECTOR, USERNAME_SELECTOR).send_keys(LOGIN_USERNAME)
+        driver.find_element(By.CSS_SELECTOR, PASSWORD_SELECTOR).send_keys(LOGIN_PASSWORD)
+        driver.find_element(By.CSS_SELECTOR, SUBMIT_SELECTOR).click()
+        time.sleep(3)
+        cookies = driver.get_cookies()
+        cookie_string = "; ".join([f"{c['name']}={c['value']}" for c in cookies])
+        driver.quit()
+        return cookie_string
+    except Exception as e:
+        print(f"[auto-login] failed: {e}")
+        return None
+
 def build_session():
     sess = requests.Session()
     sess.headers.update({"User-Agent": USER_AGENT})
-    sess.cookies.update(parse_cookie_string(COOKIE_STRING))
+    cookie = COOKIE_STRING
+    if os.getenv("AUTO_LOGIN", "false").lower() in ("1", "true", "yes", "y"):
+        auto_cookie = get_cookie_string_auto()
+        if auto_cookie:
+            cookie = auto_cookie
+            print("[auto-login] using auto-fetched cookie string")
+        else:
+            print("[auto-login] fallback to manual COOKIE_STRING")
+    sess.cookies.update(parse_cookie_string(cookie))
     return sess
 
 
@@ -219,6 +255,17 @@ def find_page_by_submission_id(notion: Client, submission_id: str):
         return None
 
 
+def getCodeAndTopic(problem_url: str):
+    # Extract topic from problem URL
+    problem_id = problem_url.split("/")[-1]
+    db = json.load(open("problem_topics.json", "r", encoding="utf-8")) # list of dicts
+    # convert db to dict for faster lookup
+    db = {item["title"]: [item["code"], item["sub_group"]] for item in db}
+
+    if problem_id:
+        code, topic = db.get(problem_id, ["Unknown", "Unknown"])
+    return code, topic
+
 def upsert_submission(notion: Client, item: dict):
     sid = item["id"].strip()
     if not sid:
@@ -240,6 +287,9 @@ def upsert_submission(notion: Client, item: dict):
     # Problem URL
     if item.get("problem_url"):
         props["Problem URL"] = {"url": item["problem_url"]}
+        code, topic = getCodeAndTopic(item["problem_url"])
+        props["Topic"] = {"select": {"name": topic}}
+        props["No"] = {"rich_text": [{"text": {"content": code}}]}
 
     # Compiler
     if item.get("compiler"):

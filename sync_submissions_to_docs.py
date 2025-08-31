@@ -27,6 +27,8 @@ Usage
 """
 
 import os, time, re, json, urllib.parse, requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -41,10 +43,17 @@ from typing import Optional, List, Dict
 # ----------------------
 load_dotenv()
 
-# Site config
 LIST_URL = os.getenv("LIST_URL", "").strip()
 COOKIE_STRING = os.getenv("COOKIE_STRING", "").strip()  # "k1=v1; k2=v2"
 USER_AGENT = os.getenv("USER_AGENT", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36").strip()
+# Selenium login variables
+AUTO_LOGIN = os.getenv("AUTO_LOGIN", "false").lower() in ("1", "true", "yes", "y")
+LOGIN_URL = os.getenv("LOGIN_URL", "").strip()
+LOGIN_USERNAME = os.getenv("LOGIN_USERNAME", "").strip()
+LOGIN_PASSWORD = os.getenv("LOGIN_PASSWORD", "").strip()
+USERNAME_SELECTOR = os.getenv("USERNAME_SELECTOR", "").strip()
+PASSWORD_SELECTOR = os.getenv("PASSWORD_SELECTOR", "").strip()
+SUBMIT_SELECTOR = os.getenv("SUBMIT_SELECTOR", "").strip()
 
 # Scraper selectors
 # By default, we assume a <table> with <tr> for rows and <td> columns in order: ID, time, problem, result.
@@ -197,38 +206,43 @@ def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
     return tables[0] if tables else None
 
 
-## MODIFICATION: New function to read the Doc and get existing submission IDs.
-def get_existing_submission_ids(docs_service, doc_id: str, section: str) -> set:
-    """Reads a table in a Google Doc and returns a set of Submission IDs from the first column."""
+## MODIFICATION: New function to read existing Problem URLs to avoid duplicates (since we no longer store Submission ID).
+def get_existing_problem_urls(docs_service, doc_id: str, section: str) -> set:
+    """Reads target table and returns a set of existing Problem URLs (assumed column order: time | topic | problem | result | problem url)."""
     if not doc_id:
         return set()
     try:
         doc = docs_service.documents().get(documentId=doc_id).execute()
         table_info = choose_table_by_section(doc, section)
-
         if not table_info:
-            print(f"[docs warning] Could not find table for section '{section}'. Assuming no existing submissions.")
+            print(f"[docs warning] Could not find table for section '{section}'. Assuming no existing rows.")
             return set()
-
         table = table_info.get("element", {}).get("table", {})
         table_rows = table.get("tableRows", [])
-        
-        existing_ids = set()
-        # Start from index 1 to skip a potential header row
-        for row in table_rows[1:]:
+        urls = set()
+        for row in table_rows[1:]:  # skip header
             cells = row.get("tableCells", [])
-            if not cells:
+            if len(cells) < 5:
                 continue
-            
-            # Submission ID is assumed to be in the first cell
-            first_cell = cells[0]
-            submission_id = extract_cell_text(first_cell)
-            if submission_id.isdigit():
-                existing_ids.add(submission_id)
-        return existing_ids
+            url_text = extract_cell_text(cells[4])  # 5th column
+            if url_text:
+                urls.add(url_text.strip())
+        return urls
     except Exception as e:
-        print(f"[docs error] Failed to get existing submission IDs: {e}")
+        print(f"[docs error] Failed to get existing problem URLs: {e}")
         return set()
+    
+
+def getCodeAndTopic(problem_url: str):
+    # Extract topic from problem URL
+    problem_id = problem_url.split("/")[-1]
+    db = json.load(open("problem_topics.json", "r", encoding="utf-8")) # list of dicts
+    # convert db to dict for faster lookup
+    db = {item["title"]: [item["code"], item["sub_group"]] for item in db}
+    
+    if problem_id:
+        code, topic = db.get(problem_id, ["Unknown", "Unknown"])
+    return code, topic
 
 
 def append_rows_and_fill_docs(doc_id: str, docs_service, table_element: Dict, rows_data: List[List[str]]):
@@ -351,10 +365,36 @@ def try_parse_time(s):
     return None
 
 
+def get_cookie_string_auto():
+    try:
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')
+        driver = webdriver.Chrome(options=options)
+        driver.get(LOGIN_URL)
+        driver.find_element(By.CSS_SELECTOR, USERNAME_SELECTOR).send_keys(LOGIN_USERNAME)
+        driver.find_element(By.CSS_SELECTOR, PASSWORD_SELECTOR).send_keys(LOGIN_PASSWORD)
+        driver.find_element(By.CSS_SELECTOR, SUBMIT_SELECTOR).click()
+        cookies = driver.get_cookies()
+        cookie_string = "; ".join([f"{c['name']}={c['value']}" for c in cookies])
+        print(cookie_string)
+        driver.quit()
+        return cookie_string
+    except Exception as e:
+        print(f"[auto-login] failed: {e}")
+        return None
+
 def build_session():
     sess = requests.Session()
     sess.headers.update({"User-Agent": USER_AGENT})
-    sess.cookies.update(parse_cookie_string(COOKIE_STRING))
+    cookie = COOKIE_STRING
+    if os.getenv("AUTO_LOGIN", "false").lower() in ("1", "true", "yes", "y"):
+        auto_cookie = get_cookie_string_auto()
+        if auto_cookie:
+            cookie = auto_cookie
+            print("[auto-login] using auto-fetched cookie string")
+        else:
+            print("[auto-login] fallback to manual COOKIE_STRING")
+    sess.cookies.update(parse_cookie_string(cookie))
     return sess
 
 
@@ -429,15 +469,15 @@ def sync():
         die("LIST_URL is empty")
     session = build_session()
     docs = None
-    existing_ids = set()
+    existing_problem_urls = set()
 
     if ENABLE_DOCS:
         if not GOOGLE_DOC_ID:
             die("ENABLE_DOCS is true but GOOGLE_DOC_ID is empty")
         docs = get_docs_service()
-        print("[docs] Fetching existing submission IDs to prevent duplicates...")
-        existing_ids = get_existing_submission_ids(docs, GOOGLE_DOC_ID, DOC_SECTION)
-        print(f"[docs] Found {len(existing_ids)} existing submissions in the document.")
+    print("[docs] Fetching existing problem URLs to prevent duplicates...")
+    existing_problem_urls = get_existing_problem_urls(docs, GOOGLE_DOC_ID, DOC_SECTION)
+    print(f"[docs] Found {len(existing_problem_urls)} existing rows in the document.")
 
     new_rows_to_add = []
     pages = [LIST_URL]
@@ -451,34 +491,26 @@ def sync():
         rows = parse_rows(html)
         print(f"[parse] found {len(rows)} rows")
         for item in rows:
-            sid = (item.get("id") or "").strip()
-            if not sid:
-                continue
-            
-            # The core logic change: skip if this ID has already been synced.
-            if sid in existing_ids:
-                continue
-
             res = (item.get("result") or "").strip()
             isCompilerJava = (item.get("compiler", "").strip().lower() == "java")
+            problem_url = item.get("problem_url") or ""
 
             if res == "AC" and isCompilerJava:
                 dt = try_parse_time(item.get("time_text") or "")
-                time_text = dt.strftime("%d-%m-%Y") if dt else (item.get("time_text") or "")
+                submission_date = dt.strftime("%d-%m-%Y") if dt else (item.get("time_text") or "")
+                code, topic = getCodeAndTopic(problem_url) if problem_url else ("", "")
 
+                # Final table column order: Submission time | Topic | Problem | Result | Problem URL
                 row_data = [
-                    sid,
-                    time_text,
+                    submission_date,
+                    topic,
+                    code,
                     item.get("problem"),
-                    item.get("result"),
-                    item.get("problem_url") or "",
-                    item.get("compiler") or "",
+                    res,
                 ]
-                
-                # Add the new row to a temporary list.
                 new_rows_to_add.append(row_data)
-                # Add the ID to our set to avoid duplicates if it appears again in the same run.
-                existing_ids.add(sid)
+                if problem_url:
+                    existing_problem_urls.add(problem_url)
 
     print(f"[sync] Found {len(new_rows_to_add)} new submissions to add.")
 
@@ -491,7 +523,7 @@ def sync():
                 print("[dry-run] would append:", row)
         else:
             try:
-                print(f"[docs] Appending {len(new_rows_to_add)} rows to the table...")
+                print(f"[docs] Appending {len(new_rows_to_add)} rows to the table (columns: time | topic | problem | result | url)...")
                 doc = docs.documents().get(documentId=GOOGLE_DOC_ID).execute()
                 table_info = choose_table_by_section(doc, DOC_SECTION)
                 if table_info:
