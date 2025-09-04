@@ -222,11 +222,12 @@ def get_existing_problem_urls(docs_service, doc_id: str, section: str) -> set:
         urls = set()
         for row in table_rows[1:]:  # skip header
             cells = row.get("tableCells", [])
-            if len(cells) < 5:
+            if len(cells) < 6:
                 continue
-            url_text = extract_cell_text(cells[4])  # 5th column
+            url_text = extract_cell_text(cells[5])  # 6th column
             if url_text:
                 urls.add(url_text.strip())
+        print(f"[docs] Retrieved {len(urls)} existing problem URLs from the document.")
         return urls
     except Exception as e:
         print(f"[docs error] Failed to get existing problem URLs: {e}")
@@ -490,28 +491,33 @@ def sync():
         html = fetch_page(session, url)
         rows = parse_rows(html)
         print(f"[parse] found {len(rows)} rows")
+# The corrected code with the de-duplication check
         for item in rows:
             res = (item.get("result") or "").strip()
             isCompilerJava = (item.get("compiler", "").strip().lower() == "java")
             problem_url = item.get("problem_url") or ""
 
-            if res == "AC" and isCompilerJava:
+            # This is the crucial new condition:
+            if res == "AC" and isCompilerJava and problem_url and problem_url not in existing_problem_urls:
+                
+                # This code will now only run for NEW, unique problems
                 dt = try_parse_time(item.get("time_text") or "")
                 submission_date = dt.strftime("%d-%m-%Y") if dt else (item.get("time_text") or "")
                 code, topic = getCodeAndTopic(problem_url) if problem_url else ("", "")
 
-                # Final table column order: Submission time | Topic | Problem | Result | Problem URL
                 row_data = [
                     submission_date,
                     topic,
                     code,
                     item.get("problem"),
                     res,
+                    problem_url,
                 ]
                 new_rows_to_add.append(row_data)
+
+                # Add the URL to the set immediately to avoid duplicates within the same run
                 if problem_url:
                     existing_problem_urls.add(problem_url)
-
     print(f"[sync] Found {len(new_rows_to_add)} new submissions to add.")
 
     # After checking all pages, add all new rows in a single batch operation.
