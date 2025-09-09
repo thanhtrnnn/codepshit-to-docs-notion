@@ -1,0 +1,1462 @@
+[
+  {
+    "code": "1",
+    "title": "CHELLO",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "2",
+    "title": "HELLOFILE",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "3",
+    "title": "HELLOJAR",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "4",
+    "title": "J01001",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "5",
+    "title": "J01002",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "6",
+    "title": "J01003",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "7",
+    "title": "J01004",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "8",
+    "title": "J01005",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "9",
+    "title": "J01006",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "10",
+    "title": "J01007",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "11",
+    "title": "J01008",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "12",
+    "title": "J01009",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "13",
+    "title": "J01010",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "14",
+    "title": "J01011",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "15",
+    "title": "J01012",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "16",
+    "title": "J01013",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "17",
+    "title": "J01014",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "18",
+    "title": "J01016",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "19",
+    "title": "J01017",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "20",
+    "title": "J01018",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "21",
+    "title": "J01021",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "22",
+    "title": "J01022",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "23",
+    "title": "J01024",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "24",
+    "title": "J01025",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "25",
+    "title": "J01026",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "26",
+    "title": "J02004",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "27",
+    "title": "J02005",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "28",
+    "title": "J02006",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "29",
+    "title": "J02007",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "30",
+    "title": "J02008",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "31",
+    "title": "J02010",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "32",
+    "title": "J02011",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "33",
+    "title": "J02012",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "34",
+    "title": "J02013",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "35",
+    "title": "J02014",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "36",
+    "title": "J02017",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "37",
+    "title": "J02020",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "38",
+    "title": "J02021",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "39",
+    "title": "J02022",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "40",
+    "title": "J02034",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "41",
+    "title": "J02101",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "42",
+    "title": "J02103",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "43",
+    "title": "J02104",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "44",
+    "title": "J02105",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "45",
+    "title": "J02106",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "46",
+    "title": "J03004",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "47",
+    "title": "J03005",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "48",
+    "title": "J03006",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "49",
+    "title": "J03007",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "50",
+    "title": "J03008",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "51",
+    "title": "J03009",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "52",
+    "title": "J03010",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "53",
+    "title": "J03011",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "54",
+    "title": "J03013",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "55",
+    "title": "J03015",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "56",
+    "title": "J03021",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "57",
+    "title": "J03024",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "58",
+    "title": "J03025",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "59",
+    "title": "J03026",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "60",
+    "title": "J03027",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "61",
+    "title": "J03032",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "62",
+    "title": "J03033",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "63",
+    "title": "J03038",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "64",
+    "title": "J03039",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "65",
+    "title": "J03040",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "66",
+    "title": "J04001",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "67",
+    "title": "J04002",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "68",
+    "title": "J04003",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "69",
+    "title": "J04004",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "70",
+    "title": "J04005",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "71",
+    "title": "J04006",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "72",
+    "title": "J04007",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "73",
+    "title": "J04008",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "74",
+    "title": "J04015",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "75",
+    "title": "J05033",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "76",
+    "title": "J05081",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "77",
+    "title": "J07001",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "78",
+    "title": "J07002",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "79",
+    "title": "J07003",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "80",
+    "title": "J07004",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "81",
+    "title": "J07005",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "82",
+    "title": "J07006",
+    "sub_group": ""
+  },
+  {
+    "code": "83",
+    "title": "J07007",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "84",
+    "title": "J07008",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "85",
+    "title": "J07010",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "86",
+    "title": "J07015",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "87",
+    "title": "J07017",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "88",
+    "title": "J07021",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "89",
+    "title": "J07022",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "90",
+    "title": "J07029",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "91",
+    "title": "J07030",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "92",
+    "title": "J07031",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "93",
+    "title": "J07032",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "94",
+    "title": "J07033",
+    "sub_group": ""
+  },
+  {
+    "code": "95",
+    "title": "J07034",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "96",
+    "title": "J07037",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "97",
+    "title": "J07040",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "98",
+    "title": "J07045",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "99",
+    "title": "J07046",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "100",
+    "title": "J07048",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "101",
+    "title": "J07050",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "102",
+    "title": "J07051",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "103",
+    "title": "J07052",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "104",
+    "title": "J07053",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "105",
+    "title": "J07054",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "106",
+    "title": "J07055",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "107",
+    "title": "J07056",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "108",
+    "title": "J07057",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "109",
+    "title": "J07058",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "110",
+    "title": "J07059",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "111",
+    "title": "J07071",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "112",
+    "title": "J07072",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "113",
+    "title": "J07073",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "114",
+    "title": "J07076",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "115",
+    "title": "J07081",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "116",
+    "title": "J07084",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "117",
+    "title": "J07085",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "118",
+    "title": "J08012",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "119",
+    "title": "J08015",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "120",
+    "title": "J08020",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "121",
+    "title": "J08021",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "122",
+    "title": "J08022",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "123",
+    "title": "J08024",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "124",
+    "title": "JKT013",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "125",
+    "title": "JKT014",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "126",
+    "title": "JKT015",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "127",
+    "title": "J02009",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "128",
+    "title": "J02016",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "129",
+    "title": "J02023",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "130",
+    "title": "J02024",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "131",
+    "title": "J02025",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "132",
+    "title": "J02026",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "133",
+    "title": "J02027",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "134",
+    "title": "J02028",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "135",
+    "title": "J02035",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "136",
+    "title": "J020356",
+    "sub_group": ""
+  },
+  {
+    "code": "137",
+    "title": "J02036",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "138",
+    "title": "J02037",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "139",
+    "title": "J02102",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "140",
+    "title": "J03012",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "141",
+    "title": "J03014",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "142",
+    "title": "J03016",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "143",
+    "title": "J03019",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "144",
+    "title": "J03020",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "145",
+    "title": "J03022",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "146",
+    "title": "J03023",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "147",
+    "title": "J03028",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "148",
+    "title": "J03031",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "149",
+    "title": "J03037",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "150",
+    "title": "J04009",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "151",
+    "title": "J04010",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "152",
+    "title": "J04011",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "153",
+    "title": "J04012",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "154",
+    "title": "J04013",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "155",
+    "title": "J04014",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "156",
+    "title": "J04018",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "157",
+    "title": "J04019",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "158",
+    "title": "J04020",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "159",
+    "title": "J04021",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "160",
+    "title": "J04022",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "161",
+    "title": "J05003",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "162",
+    "title": "J05004",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "163",
+    "title": "J05005",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "164",
+    "title": "J05006",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "165",
+    "title": "J05007",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "166",
+    "title": "J05009",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "167",
+    "title": "J05010",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "168",
+    "title": "J05011",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "169",
+    "title": "J05018",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "170",
+    "title": "J05020",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "171",
+    "title": "J05021",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "172",
+    "title": "J05022",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "173",
+    "title": "J05023",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "174",
+    "title": "J05024",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "175",
+    "title": "J05025",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "176",
+    "title": "J05026",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "177",
+    "title": "J05027",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "178",
+    "title": "J05028",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "179",
+    "title": "J05029",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "180",
+    "title": "J05030",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "181",
+    "title": "J05031",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "182",
+    "title": "J05032",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "183",
+    "title": "J05034",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "184",
+    "title": "J05035",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "185",
+    "title": "J05036",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "186",
+    "title": "J05037",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "187",
+    "title": "J05038",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "188",
+    "title": "J05040",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "189",
+    "title": "J05041",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "190",
+    "title": "J05042",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "191",
+    "title": "J05043",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "192",
+    "title": "J05044",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "193",
+    "title": "J05045",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "194",
+    "title": "J05046",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "195",
+    "title": "J05047",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "196",
+    "title": "J05048",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "197",
+    "title": "J05049",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "198",
+    "title": "J05050",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "199",
+    "title": "J05051",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "200",
+    "title": "J05052",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "201",
+    "title": "J05053",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "202",
+    "title": "J05054",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "203",
+    "title": "J05055",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "204",
+    "title": "J05056",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "205",
+    "title": "J05057",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "206",
+    "title": "J05058",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "207",
+    "title": "J05060",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "208",
+    "title": "J05061",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "209",
+    "title": "J05064",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "210",
+    "title": "J05067",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "211",
+    "title": "J05068",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "212",
+    "title": "J05069",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "213",
+    "title": "J05070",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "214",
+    "title": "J05074",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "215",
+    "title": "J05075",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "216",
+    "title": "J05076",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "217",
+    "title": "J05077",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "218",
+    "title": "J05078",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "219",
+    "title": "J05079",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "220",
+    "title": "J05080",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "221",
+    "title": "J05082",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "222",
+    "title": "J06003",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "223",
+    "title": "J06004",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "224",
+    "title": "J07009",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "225",
+    "title": "J07013",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "226",
+    "title": "J07014",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "227",
+    "title": "J07016",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "228",
+    "title": "J07018",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "229",
+    "title": "J07023",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "230",
+    "title": "J07024",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "231",
+    "title": "J07025",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "232",
+    "title": "J07038",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "233",
+    "title": "J07041",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "234",
+    "title": "J07042",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "235",
+    "title": "J07074",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "236",
+    "title": "J07075",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "237",
+    "title": "J07078",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "238",
+    "title": "J08010",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "239",
+    "title": "J08011",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "240",
+    "title": "J08025",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "241",
+    "title": "J08026",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "242",
+    "title": "J08027",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "243",
+    "title": "J08028",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "244",
+    "title": "J08029",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "245",
+    "title": "J01020",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "246",
+    "title": "J01023",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "247",
+    "title": "J02019",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "248",
+    "title": "J03017",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "249",
+    "title": "J03018",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "250",
+    "title": "J03029",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "251",
+    "title": "J03036",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "252",
+    "title": "J04016",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "253",
+    "title": "J04017",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "254",
+    "title": "J05008",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "255",
+    "title": "J05012",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "256",
+    "title": "J05013",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "257",
+    "title": "J05014",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "258",
+    "title": "J05015",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "259",
+    "title": "J05016",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "260",
+    "title": "J05017",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "261",
+    "title": "J05019",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "262",
+    "title": "J05059",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "263",
+    "title": "J05062",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "264",
+    "title": "J05063",
+    "sub_group": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG"
+  },
+  {
+    "code": "265",
+    "title": "J05065",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "266",
+    "title": "J05066",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "267",
+    "title": "J05071",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "268",
+    "title": "J05072",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "269",
+    "title": "J05073",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "270",
+    "title": "J06001",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "271",
+    "title": "J06002",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "272",
+    "title": "J06005",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "273",
+    "title": "J06006",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "274",
+    "title": "J06007",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "275",
+    "title": "J06008",
+    "sub_group": "QUAN HỆ GIỮA CÁC LỚP"
+  },
+  {
+    "code": "276",
+    "title": "J07011",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "277",
+    "title": "J07012",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "278",
+    "title": "J07019",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "279",
+    "title": "J07020",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "280",
+    "title": "J07027",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "281",
+    "title": "J07028",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "282",
+    "title": "J07035",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "283",
+    "title": "J07036",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "284",
+    "title": "J07047",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "285",
+    "title": "J07049",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "286",
+    "title": "J07060",
+    "sub_group": "VÀO RA FILE"
+  },
+  {
+    "code": "287",
+    "title": "J08023",
+    "sub_group": "ỨNG DỤNG JAVA COLLECTION"
+  },
+  {
+    "code": "288",
+    "title": "TN02012",
+    "sub_group": "MẢNG ĐỐI TƯỢNG"
+  },
+  {
+    "code": "289",
+    "title": "J02033",
+    "sub_group": "MẢNG"
+  },
+  {
+    "code": "290",
+    "title": "J03030",
+    "sub_group": "XÂU KÝ TỰ"
+  },
+  {
+    "code": "291",
+    "title": "J03035",
+    "sub_group": "LẬP TRÌNH JAVA CƠ BẢN"
+  },
+  {
+    "code": "292",
+    "title": "J07077",
+    "sub_group": "VÀO RA FILE"
+  }
+]
