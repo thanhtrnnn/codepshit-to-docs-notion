@@ -132,7 +132,3 @@ python .\export_problem_topics.py
 - Batch-create rows (to reduce API calls) — currently script inserts rows then fills cells.
 - Support richer formatting (hyperlinks) when inserting Problem URL into Docs.
 - Add automated tests for selector parsing and table selection logic.
-
----
-
-If you want, I can also update `.env.example` to match the current variables and add a short troubleshooting section specific to ChromeDriver installation on Windows.
