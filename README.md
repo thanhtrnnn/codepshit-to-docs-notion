@@ -112,9 +112,87 @@ Run Notion sync (preview mode will still honor DRY_RUN logic inside the script):
 python .\sync_submissions_to_notion.py
 ```
 
+## GitHub Actions Automation
+
+This repository includes GitHub Actions workflows to automatically run the Python scripts on a schedule. Three workflows are available:
+
+### Available Workflows
+
+1. **Sync Submissions to Google Docs** (`.github/workflows/sync-to-docs.yml`)
+   - Runs daily at 2 AM UTC
+   - Two-step process: scrapes submissions and updates Google Docs
+   - Can be triggered manually from the Actions tab
+
+2. **Sync Submissions to Notion** (`.github/workflows/sync-to-notion.yml`)
+   - Runs daily at 2 AM UTC
+   - Syncs submissions to your Notion database
+   - Can be triggered manually from the Actions tab
+
+3. **Export Problem Topics** (`.github/workflows/export-topics.yml`)
+   - Runs weekly on Monday at 3 AM UTC
+   - Exports problem topics and commits the JSON file
+   - Can be triggered manually from the Actions tab
+
+### Setup Instructions
+
+To enable GitHub Actions automation:
+
+1. **Navigate to your repository Settings → Secrets and variables → Actions**
+
+2. **Add the following repository secrets:**
+
+   **Authentication secrets (required for all workflows):**
+   - `LIST_URL` - Your submissions page URL
+   - `AUTO_LOGIN` - Set to `true` to use Selenium auto-login
+   - `LOGIN_URL` - Login page URL
+   - `LOGIN_USERNAME` - Your username
+   - `LOGIN_PASSWORD` - Your password
+   - `USERNAME_SELECTOR` - CSS selector for username field (e.g., `#login__user`)
+   - `PASSWORD_SELECTOR` - CSS selector for password field (e.g., `#login__pw`)
+   - `SUBMIT_SELECTOR` - CSS selector for submit button (e.g., `button[type='submit']`)
+   - `COOKIE_STRING` - (Optional) Fallback cookie string if auto-login fails
+   - `USER_AGENT` - (Optional) Browser user agent string
+
+   **Google Docs specific secrets (for sync-to-docs.yml):**
+   - `GOOGLE_APPLICATION_CREDENTIALS` - Contents of your service account JSON file
+   - `GOOGLE_DOC_ID` - Your Google Doc ID
+   - `DOC_SECTION` - Heading text to locate the table (e.g., `CHUONG 2 > Bai tap > codeptit`)
+
+   **Notion specific secrets (for sync-to-notion.yml):**
+   - `NOTION_API_KEY` - Your Notion integration API key
+   - `NOTION_DATABASE_ID` - Your Notion database ID
+   - `ENABLE_PAGINATION` - (Optional) Set to `true` to enable pagination
+   - `PAGE_PARAM` - (Optional) Query parameter for pagination (default: `page`)
+   - `MAX_PAGES` - (Optional) Maximum pages to scrape (default: `1`)
+   - `NOTION_RATE_DELAY` - (Optional) Delay between Notion API calls in seconds (default: `0.5`)
+
+3. **Enable Actions in your repository:**
+   - Go to the **Actions** tab in your repository
+   - If prompted, click "I understand my workflows, go ahead and enable them"
+
+4. **Trigger workflows manually (optional):**
+   - Go to **Actions** tab
+   - Select the workflow you want to run
+   - Click **Run workflow** → **Run workflow**
+
+### Schedule Customization
+
+To change when workflows run, edit the `cron` expressions in the workflow files:
+- Daily at 2 AM UTC: `0 2 * * *`
+- Weekly on Monday at 3 AM UTC: `0 3 * * 1`
+
+For more information on cron syntax, see [crontab.guru](https://crontab.guru/).
+
+### Monitoring Workflow Runs
+
+- View workflow run history in the **Actions** tab
+- Each run shows logs for all steps
+- Artifacts (batch results, problem topics JSON) are saved for download
+
 ## Troubleshooting
 - Selenium import error: install `selenium` and ensure ChromeDriver is available on PATH.
 - Auto-login fails: try running without `--headless`, verify selectors, or copy `COOKIE_STRING` manually.
 - Docs API errors: verify service account JSON path and that the Doc is shared with the service account email.
  - Docs API errors: verify service account JSON path and that the Doc is shared with the service account email.
  - Table not found: ensure `DOC_SECTION` exactly matches a heading in the document (matching is accent-aware and compares text against nearby H1/H2/H3 headings).
+- GitHub Actions failures: check the Actions tab for detailed logs, verify all required secrets are set correctly.
