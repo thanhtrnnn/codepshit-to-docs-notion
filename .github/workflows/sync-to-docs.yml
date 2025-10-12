@@ -45,6 +45,7 @@ jobs:
         
     - name: Step 2 - Update Google Docs (DRY_RUN=false)
       env:
+        LIST_URL: ${{ secrets.LIST_URL }}
         GOOGLE_DOC_ID: ${{ secrets.GOOGLE_DOC_ID }}
         DOC_SECTION: ${{ secrets.DOC_SECTION }}
         ENABLE_DOCS: 'true'
