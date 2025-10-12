@@ -45,7 +45,6 @@ jobs:
         
     - name: Step 2 - Update Google Docs (DRY_RUN=false)
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         GOOGLE_DOC_ID: ${{ secrets.GOOGLE_DOC_ID }}
         DOC_SECTION: ${{ secrets.DOC_SECTION }}
         ENABLE_DOCS: 'true'
@@ -53,7 +52,7 @@ jobs:
         BATCH_FILE: 'batch_result.json'
       run: |
         # Write credentials to a temporary file
-        echo "$GOOGLE_APPLICATION_CREDENTIALS" > /tmp/gcloud-credentials.json
+        echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > /tmp/gcloud-credentials.json
         export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-credentials.json
         python sync_submissions_to_docs.py
         
