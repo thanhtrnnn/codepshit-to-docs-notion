@@ -1,4 +1,95 @@
 {
+  "188": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "188",
+    "problem": "LẬP BẢNG TÍNH CÔNG",
+    "result": "AC"
+  },
+  "178": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "178",
+    "problem": "DANH SÁCH DOANH NGHIỆP NHẬN SINH VIÊN THỰC TẬP - 1",
+    "result": "AC"
+  },
+  "170": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "170",
+    "problem": "SẮP XẾP SINH VIÊN THEO LỚP",
+    "result": "AC"
+  },
+  "75": {
+    "date": "30-09-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "75",
+    "problem": "SẮP XẾP THỜI GIAN",
+    "result": "AC"
+  },
+  "74": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "74",
+    "problem": "TÍNH THU NHẬP GIÁO VIÊN",
+    "result": "AC"
+  },
+  "73": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "73",
+    "problem": "CHU VI TAM GIÁC",
+    "result": "AC"
+  },
+  "72": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "72",
+    "problem": "KHAI BÁO LỚP NHÂN VIÊN",
+    "result": "AC"
+  },
+  "71": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "71",
+    "problem": "KHAI BÁO LỚP SINH VIÊN",
+    "result": "AC"
+  },
+  "70": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "70",
+    "problem": "KHAI BÁO LỚP THÍ SINH",
+    "result": "AC"
+  },
+  "69": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "69",
+    "problem": "TỔNG PHÂN SỐ",
+    "result": "AC"
+  },
+  "68": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "68",
+    "problem": "PHÂN SỐ",
+    "result": "AC"
+  },
+  "67": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "67",
+    "problem": "KHAI BÁO LỚP HÌNH CHỮ NHẬT",
+    "result": "AC"
+  },
+  "66": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "66",
+    "problem": "KHAI BÁO LỚP POINT",
+    "result": "AC"
+  },
   "143": {
     "date": "16-09-2025",
     "topic": "XÂU KÝ TỰ",
