@@ -1,0 +1,66 @@
+name: Sync Submissions to Google Docs
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  scrape-and-sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Install Chrome and ChromeDriver
+      uses: browser-actions/setup-chrome@v1
+      
+    - name: Step 1 - Scrape submissions (DRY_RUN=true)
+      env:
+        LIST_URL: ${{ secrets.LIST_URL }}
+        AUTO_LOGIN: ${{ secrets.AUTO_LOGIN }}
+        LOGIN_URL: ${{ secrets.LOGIN_URL }}
+        LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
+        LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+        USERNAME_SELECTOR: ${{ secrets.USERNAME_SELECTOR }}
+        PASSWORD_SELECTOR: ${{ secrets.PASSWORD_SELECTOR }}
+        SUBMIT_SELECTOR: ${{ secrets.SUBMIT_SELECTOR }}
+        COOKIE_STRING: ${{ secrets.COOKIE_STRING }}
+        USER_AGENT: ${{ secrets.USER_AGENT }}
+        DRY_RUN: 'true'
+        BATCH_FILE: 'batch_result.json'
+      run: |
+        python sync_submissions_to_docs.py
+        
+    - name: Step 2 - Update Google Docs (DRY_RUN=false)
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        GOOGLE_DOC_ID: ${{ secrets.GOOGLE_DOC_ID }}
+        DOC_SECTION: ${{ secrets.DOC_SECTION }}
+        ENABLE_DOCS: 'true'
+        DRY_RUN: 'false'
+        BATCH_FILE: 'batch_result.json'
+      run: |
+        # Write credentials to a temporary file
+        echo "$GOOGLE_APPLICATION_CREDENTIALS" > /tmp/gcloud-credentials.json
+        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcloud-credentials.json
+        python sync_submissions_to_docs.py
+        
+    - name: Upload batch result as artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: batch-result
+        path: batch_result.json
+        retention-days: 7

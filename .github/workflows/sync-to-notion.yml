@@ -1,0 +1,48 @@
+name: Sync Submissions to Notion
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  sync-to-notion:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Install Chrome and ChromeDriver
+      uses: browser-actions/setup-chrome@v1
+      
+    - name: Sync submissions to Notion
+      env:
+        NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+        NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        LIST_URL: ${{ secrets.LIST_URL }}
+        AUTO_LOGIN: ${{ secrets.AUTO_LOGIN }}
+        LOGIN_URL: ${{ secrets.LOGIN_URL }}
+        LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
+        LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+        USERNAME_SELECTOR: ${{ secrets.USERNAME_SELECTOR }}
+        PASSWORD_SELECTOR: ${{ secrets.PASSWORD_SELECTOR }}
+        SUBMIT_SELECTOR: ${{ secrets.SUBMIT_SELECTOR }}
+        COOKIE_STRING: ${{ secrets.COOKIE_STRING }}
+        USER_AGENT: ${{ secrets.USER_AGENT }}
+        ENABLE_PAGINATION: ${{ secrets.ENABLE_PAGINATION }}
+        PAGE_PARAM: ${{ secrets.PAGE_PARAM }}
+        MAX_PAGES: ${{ secrets.MAX_PAGES }}
+        NOTION_RATE_DELAY: ${{ secrets.NOTION_RATE_DELAY }}
+      run: |
+        python sync_submissions_to_notion.py
