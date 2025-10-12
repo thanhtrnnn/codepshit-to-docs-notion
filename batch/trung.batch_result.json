@@ -1,0 +1,576 @@
+{
+  "64": {
+    "date": "14-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "64",
+    "problem": "CHIA HẾT",
+    "result": "AC"
+  },
+  "148": {
+    "date": "11-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "148",
+    "problem": "XÂU ĐẦY ĐỦ",
+    "result": "AC"
+  },
+  "146": {
+    "date": "11-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "146",
+    "problem": "SỐ LA MÃ",
+    "result": "AC"
+  },
+  "145": {
+    "date": "11-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "145",
+    "problem": "XỬ LÝ VĂN BẢN",
+    "result": "AC"
+  },
+  "139": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "139",
+    "problem": "MA TRẬN XOẮN ỐC TĂNG DẦN",
+    "result": "AC"
+  },
+  "135": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "135",
+    "problem": "QUAY PHẢI",
+    "result": "AC"
+  },
+  "132": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "132",
+    "problem": "DÃY CON CÓ K PHẦN TỬ TĂNG DẦN",
+    "result": "AC"
+  },
+  "130": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "130",
+    "problem": "DÃY CON CÓ TỔNG LẺ",
+    "result": "AC"
+  },
+  "126": {
+    "date": "06-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "126",
+    "problem": "GÕ BÀN PHÍM",
+    "result": "AC"
+  },
+  "125": {
+    "date": "06-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "125",
+    "problem": "ĐẦU TƯ  CHỨNG KHOÁN",
+    "result": "AC"
+  },
+  "131": {
+    "date": "04-09-2025",
+    "topic": "MẢNG",
+    "number": "131",
+    "problem": "DÃY CON CÓ TỔNG NGUYÊN TỐ",
+    "result": "AC"
+  },
+  "127": {
+    "date": "04-09-2025",
+    "topic": "MẢNG",
+    "number": "127",
+    "problem": "XẾP HÀNG",
+    "result": "AC"
+  },
+  "144": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "144",
+    "problem": "TÌM TỪ THUẬN NGHỊCH DÀI NHẤT",
+    "result": "AC"
+  },
+  "142": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "142",
+    "problem": "CHIA HẾT CHO 11",
+    "result": "AC"
+  },
+  "141": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "141",
+    "problem": "TỔNG SỐ NGUYÊN LỚN - 2",
+    "result": "AC"
+  },
+  "140": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "140",
+    "problem": "TỔNG SỐ NGUYÊN LỚN - 1",
+    "result": "AC"
+  },
+  "138": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "138",
+    "problem": "DÃY ƯU THẾ",
+    "result": "AC"
+  },
+  "128": {
+    "date": "04-09-2025",
+    "topic": "MẢNG",
+    "number": "128",
+    "problem": "BỘ BA SỐ PYTAGO",
+    "result": "AC"
+  },
+  "122": {
+    "date": "04-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "122",
+    "problem": "PHẦN TỬ BÊN PHẢI ĐẦU TIÊN LỚN HƠN",
+    "result": "AC"
+  },
+  "121": {
+    "date": "04-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "121",
+    "problem": "DÃY NGOẶC ĐÚNG DÀI NHẤT",
+    "result": "AC"
+  },
+  "120": {
+    "date": "23-08-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "120",
+    "problem": "KIỂM TRA DÃY NGOẶC ĐÚNG",
+    "result": "AC"
+  },
+  "118": {
+    "date": "23-08-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "118",
+    "problem": "HÌNH SAO",
+    "result": "AC"
+  },
+  "76": {
+    "date": "23-08-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "76",
+    "problem": "DANH SÁCH MẶT HÀNG",
+    "result": "AC"
+  },
+  "75": {
+    "date": "23-08-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "75",
+    "problem": "SẮP XẾP THỜI GIAN",
+    "result": "AC"
+  },
+  "74": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "74",
+    "problem": "TÍNH THU NHẬP GIÁO VIÊN",
+    "result": "AC"
+  },
+  "73": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "73",
+    "problem": "CHU VI TAM GIÁC",
+    "result": "AC"
+  },
+  "72": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "72",
+    "problem": "KHAI BÁO LỚP NHÂN VIÊN",
+    "result": "AC"
+  },
+  "71": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "71",
+    "problem": "KHAI BÁO LỚP SINH VIÊN",
+    "result": "AC"
+  },
+  "70": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "70",
+    "problem": "KHAI BÁO LỚP THÍ SINH",
+    "result": "AC"
+  },
+  "69": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "69",
+    "problem": "TỔNG PHÂN SỐ",
+    "result": "AC"
+  },
+  "68": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "68",
+    "problem": "PHÂN SỐ",
+    "result": "AC"
+  },
+  "67": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "67",
+    "problem": "KHAI BÁO LỚP HÌNH CHỮ NHẬT",
+    "result": "AC"
+  },
+  "66": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "66",
+    "problem": "KHAI BÁO LỚP POINT",
+    "result": "AC"
+  },
+  "65": {
+    "date": "22-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "65",
+    "problem": "BIỂN SỐ ĐẸP",
+    "result": "AC"
+  },
+  "63": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "63",
+    "problem": "ĐÁNH DẤU CHỮ CÁI",
+    "result": "AC"
+  },
+  "61": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "61",
+    "problem": "ĐẢO TỪ",
+    "result": "AC"
+  },
+  "60": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "60",
+    "problem": "RÚT GỌN XÂU KÝ TỰ",
+    "result": "AC"
+  },
+  "59": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "59",
+    "problem": "XÂU KHÁC NHAU DÀI NHẤT",
+    "result": "AC"
+  },
+  "58": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "58",
+    "problem": "XÂU ĐỐI XỨNG",
+    "result": "AC"
+  },
+  "57": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "57",
+    "problem": "SỐ ƯU THẾ",
+    "result": "AC"
+  },
+  "56": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "56",
+    "problem": "ĐIỆN THOẠI CỤC GẠCH",
+    "result": "AC"
+  },
+  "53": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "53",
+    "problem": "ƯỚC SỐ CHUNG LỚN NHẤT CỦA SỐ NGUYÊN LỚN",
+    "result": "AC"
+  },
+  "55": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "55",
+    "problem": "HIỆU SỐ NGUYÊN LỚN  - 2",
+    "result": "AC"
+  },
+  "54": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "54",
+    "problem": "HIỆU SỐ NGUYÊN LỚN - 1",
+    "result": "AC"
+  },
+  "52": {
+    "date": "19-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "52",
+    "problem": "ĐỊA CHỈ EMAIL",
+    "result": "AC"
+  },
+  "51": {
+    "date": "19-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "51",
+    "problem": "TẬP TỪ RIÊNG CỦA HAI XÂU",
+    "result": "AC"
+  },
+  "50": {
+    "date": "19-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "50",
+    "problem": "SỐ ĐẸP 3",
+    "result": "AC"
+  },
+  "49": {
+    "date": "19-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "49",
+    "problem": "SỐ ĐẸP 2",
+    "result": "AC"
+  },
+  "48": {
+    "date": "18-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "48",
+    "problem": "SỐ ĐẸP 1",
+    "result": "AC"
+  },
+  "47": {
+    "date": "18-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "47",
+    "problem": "CHUẨN HÓA XÂU HỌ TÊN - 2",
+    "result": "AC"
+  },
+  "46": {
+    "date": "18-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "46",
+    "problem": "CHUẨN HÓA XÂU HỌ TÊN - 1",
+    "result": "AC"
+  },
+  "45": {
+    "date": "18-08-2025",
+    "topic": "MẢNG",
+    "number": "45",
+    "problem": "MA TRẬN NHỊ PHÂN",
+    "result": "AC"
+  },
+  "44": {
+    "date": "18-08-2025",
+    "topic": "MẢNG",
+    "number": "44",
+    "problem": "DANH SÁCH KỀ",
+    "result": "AC"
+  },
+  "43": {
+    "date": "18-08-2025",
+    "topic": "MẢNG",
+    "number": "43",
+    "problem": "DANH SÁCH CẠNH",
+    "result": "AC"
+  },
+  "24": {
+    "date": "18-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "24",
+    "problem": "HÌNH VUÔNG",
+    "result": "AC"
+  },
+  "22": {
+    "date": "18-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "22",
+    "problem": "XÂU NHỊ PHÂN",
+    "result": "AC"
+  },
+  "42": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "42",
+    "problem": "TÍCH MA TRẬN VỚI CHUYỂN VỊ CỦA NÓ",
+    "result": "AC"
+  },
+  "41": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "41",
+    "problem": "IN MA TRẬN",
+    "result": "AC"
+  },
+  "40": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "40",
+    "problem": "BỔ SUNG DÃY SỐ",
+    "result": "AC"
+  },
+  "39": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "39",
+    "problem": "SỐ XA CÁCH",
+    "result": "AC"
+  },
+  "38": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "38",
+    "problem": "LIỆT KÊ TỔ HỢP - 2",
+    "result": "AC"
+  },
+  "37": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "37",
+    "problem": "LIỆT KÊ TỔ HỢP - 1",
+    "result": "AC"
+  },
+  "36": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "36",
+    "problem": "THU GỌN DÃY SỐ",
+    "result": "AC"
+  },
+  "35": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "35",
+    "problem": "ĐIỂM CÂN BẰNG",
+    "result": "AC"
+  },
+  "34": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "34",
+    "problem": "SẮP XẾP NỔI BỌT",
+    "result": "AC"
+  },
+  "33": {
+    "date": "17-08-2025",
+    "topic": "MẢNG",
+    "number": "33",
+    "problem": "SẮP XẾP CHÈN",
+    "result": "AC"
+  },
+  "32": {
+    "date": "15-08-2025",
+    "topic": "MẢNG",
+    "number": "32",
+    "problem": "SẮP XẾP CHỌN",
+    "result": "AC"
+  },
+  "31": {
+    "date": "15-08-2025",
+    "topic": "MẢNG",
+    "number": "31",
+    "problem": "SẮP XẾP ĐỔI CHỖ TRỰC TIẾP",
+    "result": "AC"
+  },
+  "30": {
+    "date": "15-08-2025",
+    "topic": "MẢNG",
+    "number": "30",
+    "problem": "BỘI SỐ NHỎ NHẤT CỦA N SỐ NGUYÊN DƯƠNG ĐẦU TIÊN",
+    "result": "AC"
+  },
+  "29": {
+    "date": "15-08-2025",
+    "topic": "MẢNG",
+    "number": "29",
+    "problem": "ĐẾM SỐ LẦN XUẤT HIỆN",
+    "result": "AC"
+  },
+  "28": {
+    "date": "15-08-2025",
+    "topic": "MẢNG",
+    "number": "28",
+    "problem": "HỢP CỦA HAI DÃY SỐ",
+    "result": "AC"
+  },
+  "27": {
+    "date": "15-08-2025",
+    "topic": "MẢNG",
+    "number": "27",
+    "problem": "GIAO CỦA HAI DÃY SỐ",
+    "result": "AC"
+  },
+  "26": {
+    "date": "15-08-2025",
+    "topic": "MẢNG",
+    "number": "26",
+    "problem": "MẢNG ĐỐI XỨNG",
+    "result": "AC"
+  },
+  "25": {
+    "date": "15-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "25",
+    "problem": "SỐ CHÍNH PHƯƠNG",
+    "result": "AC"
+  },
+  "23": {
+    "date": "15-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "23",
+    "problem": "SỐ TAM PHÂN",
+    "result": "AC"
+  },
+  "21": {
+    "date": "15-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "21",
+    "problem": "TÍNH LŨY THỪA",
+    "result": "AC"
+  },
+  "20": {
+    "date": "14-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "20",
+    "problem": "SỐ KHÔNG LIỀN KỀ",
+    "result": "AC"
+  },
+  "19": {
+    "date": "14-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "19",
+    "problem": "SỐ LIỀN KỀ",
+    "result": "AC"
+  },
+  "18": {
+    "date": "14-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "18",
+    "problem": "CHỮ SỐ 4 VÀ CHỮ SỐ 7",
+    "result": "AC"
+  },
+  "17": {
+    "date": "14-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "17",
+    "problem": "ƯỚC SỐ NGUYÊN TỐ LỚN NHẤT",
+    "result": "AC"
+  },
+  "16": {
+    "date": "14-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "16",
+    "problem": "TỔNG ƯỚC SỐ - 1",
+    "result": "AC"
+  },
+  "15": {
+    "date": "14-08-2025",
+    "topic": "LẬP TRÌNH JAVA CƠ BẢN",
+    "number": "15",
+    "problem": "ƯỚC SỐ CHIA HẾT CHO 2",
+    "result": "AC"
+  }
+}

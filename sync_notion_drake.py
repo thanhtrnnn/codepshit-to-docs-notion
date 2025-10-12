@@ -13,13 +13,11 @@ Features
 
 Requirements
 - NOTION_DATABASE must have these properties (case-sensitive):
-  - Problem (title, DEFAULT field)
-  - No (rich_text)
-  - Topic (select)
+  - Problem (title)
   - Submission ID (rich_text)
-  - Submission time (date)
-  - Result (select)
-  - Problem URL (url)
+  - Submission time (date)      # optional but recommended
+  - Result (select)             # optional
+  - Problem URL (url)           # optional
 
 Usage
 1) Create a Notion Internal Integration, share the target database with it.
@@ -234,6 +232,7 @@ def notion_client():
         die("NOTION_API_KEY is empty")
     if not NOTION_DATABASE_ID:
         die("NOTION_DATABASE_ID is empty")
+    print(NOTION_DATABASE_ID)
     return Client(auth=NOTION_API_KEY)
 
 
@@ -244,7 +243,7 @@ def find_page_by_number(notion: Client, number: str):
             **{
                 "database_id": NOTION_DATABASE_ID,
                 "filter": {
-                    "property": "No",
+                    "property": "Số",
                     "rich_text": {"equals": number},
                 },
                 "page_size": 1,
@@ -262,11 +261,11 @@ def getCodeAndTopic(problem_url: str):
     problem_id = problem_url.split("/")[-1]
     db = json.load(open("problem_topics.json", "r", encoding="utf-8")) # list of dicts
     # convert db to dict for faster lookup
-    db = {item["title"]: [item["code"], item["sub_group"]] for item in db}
+    db = {item["title"]: [item["code"], item["title"], item["sub_group"]] for item in db}
 
     if problem_id:
-        code, topic = db.get(problem_id, ["Unknown", "Unknown"])
-    return code, topic
+        id, code, topic = db.get(problem_id, ["Unknown", "Unknown", "Unknown"])
+    return id, code, topic
 
 def upsert_submission(notion: Client, item: dict):
     sid = item["id"].strip()
@@ -275,23 +274,23 @@ def upsert_submission(notion: Client, item: dict):
 
     # Prepare properties
     props = {
-        "Problem": {"title": [{"text": {"content": item.get("problem") or ""}}]},
-        "Submission ID": {"rich_text": [{"text": {"content": sid}}]},
+        "Tên bài": {"rich_text": [{"text": {"content": item.get("problem") or ""}}]},
+        "ID": {"rich_text": [{"text": {"content": sid}}]},
     }
 
     # Result (select)
     res = (item.get("result") or "").strip()
     if res:
-        props["Result"] = {"select": {"name": res}}
+        props["Status"] = {"status": {"name": res}}
 
     # Problem URL
     if item.get("problem_url"):
-        props["Problem URL"] = {"url": item["problem_url"]}
-        code, topic = getCodeAndTopic(item["problem_url"])
-        props["Topic"] = {"select": {"name": topic}}
-        props["No"] = {"rich_text": [{"text": {"content": code}}]}
+        id, code, topic = getCodeAndTopic(item["problem_url"])
+        props["Mã bài"] = {"title": [{"text": {"content": code or ""}}]}
+        props["Chủ đề"] = {"select": {"name": topic}}
+        props["Số"] = {"rich_text": [{"text": {"content": id or ""}}]}
 
-    existing = find_page_by_number(notion, props["No"]["rich_text"][0]["text"]["content"])
+    existing = find_page_by_number(notion, props["Số"]["rich_text"][0]["text"]["content"])
 
     # Compiler
     if item.get("compiler"):
@@ -301,10 +300,10 @@ def upsert_submission(notion: Client, item: dict):
     dt = try_parse_time(item.get("time_text") or "")
     if dt:
         # Notion expects ISO8601
-        props["Submission time"] = {"date": {"start": dt.isoformat()}}
+        props["Thời gian nộp"] = {"date": {"start": dt.isoformat()}}
 
     try:
-        # existing = ignore submission duplicate problem/ already in database cases
+        # existing = ignore submission not AC/ duplicate AC/ already in database cases
         if not existing:
             if res == "AC" and isCompilerJava:
                 notion.pages.create(parent={"database_id": NOTION_DATABASE_ID}, properties=props)

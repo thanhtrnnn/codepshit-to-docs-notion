@@ -90,6 +90,7 @@ GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "")
 DOC_SECTION = os.getenv("DOC_SECTION", "CHUONG 2 > Bai tap > codeptit").strip()
 ENABLE_DOCS = os.getenv("ENABLE_DOCS", "false").lower() in ("1", "true", "yes", "y")
 DRY_RUN = os.getenv("DRY_RUN", "false").lower() in ("1", "true", "yes", "y")
+BATCH_FILE = os.getenv("BATCH_FILE", "batch_result.json").strip()
 
 DOC_SCOPES = [
     "https://www.googleapis.com/auth/documents",
@@ -102,6 +103,45 @@ def get_docs_service():
         raise SystemExit("GOOGLE_APPLICATION_CREDENTIALS is required for Google Docs integration")
     creds = service_account.Credentials.from_service_account_file(GOOGLE_APPLICATION_CREDENTIALS, scopes=DOC_SCOPES)
     return build("docs", "v1", credentials=creds)
+
+
+# ----------------------
+# Batch helpers (JSON store keyed by numeric problem "number")
+# ----------------------
+def load_batch() -> Dict[str, Dict]:
+    try:
+        if not os.path.exists(BATCH_FILE):
+            return {}
+        with open(BATCH_FILE, "r", encoding="utf-8") as f:
+            content = f.read().strip()
+            if not content:
+                return {}
+            data = json.loads(content)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_batch(data: Dict[str, Dict]):
+    try:
+        with open(BATCH_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print(f"[batch] saved {len(data)} entries -> {BATCH_FILE}")
+    except Exception as e:
+        print(f"[batch warn] failed saving {BATCH_FILE}: {e}")
+
+
+def problem_number_from_url(url: str) -> Optional[str]:
+    if not url:
+        return None
+    try:
+        last = url.rstrip('/').split('/')[-1]
+        m = re.search(r"(\d+)$", last)
+        if not m:
+            return None
+        return str(int(m.group(1)))
+    except Exception:
+        return None
 
 
 def extract_paragraph_text(el: Dict) -> str:
@@ -144,66 +184,79 @@ def find_tables_with_context(doc: Dict) -> List[Dict]:
 
 
 def choose_table_by_section(doc: Dict, section_name: str) -> Optional[Dict]:
-    content = doc.get("body", {}).get("content", [])
-    tables = []
-    for i, el in enumerate(content):
-        if "table" in el:
-            h1 = h2 = h3 = ""
-            for j in range(i - 1, max(i - 100, -1), -1):
-                c = content[j]
-                if "paragraph" not in c:
-                    continue
-                style = c["paragraph"].get("paragraphStyle", {})
-                named = style.get("namedStyleType", "")
-                txt = extract_paragraph_text(c)
-                if not txt:
-                    continue
-                if named == "HEADING_3" and not h3:
-                    h3 = txt
-                elif named == "HEADING_2" and not h2:
-                    h2 = txt
-                elif named == "HEADING_1" and not h1:
-                    h1 = txt
-                if h1 and h2 and h3:
-                    break
-            ctx = " ".join(x for x in (h1, h2, h3) if x)
-            tables.append({"element": el, "index": i, "h1": h1, "h2": h2, "h3": h3, "context": ctx})
+    """Locate the table whose heading path exactly matches DOC_SECTION.
+
+    DOC_SECTION is split by >, |, ->, / and compared (case-insensitive, trimmed) against
+    the surrounding Heading1/2/3 text. We require an exact match for available levels;
+    no fuzzy fallback to avoid picking a lookalike table in a different section.
+    """
 
     def normalize(s: str) -> str:
-        return re.sub(r"[^0-9a-z]+", " ", (s or "").lower()).strip()
+        if not s:
+            return ""
+        s_norm = "".join(ch if (ch.isalnum() or ch.isspace()) else " " for ch in s.casefold())
+        return re.sub(r"\s+", " ", s_norm).strip()
 
-    parts = [p.strip() for p in re.split(r">|\||->|/", (section_name or "")) if p.strip()]
-    parts = [normalize(p) for p in parts]
+    def split_section_path(path: str) -> List[str]:
+        if not path:
+            return []
+        parts_raw = re.split(r">|\||->|/", path)
+        out = []
+        for part in parts_raw:
+            norm = normalize(part)
+            if norm:
+                out.append(norm)
+        return out
 
-    for t in tables:
-        nh1 = normalize(t.get("h1", ""))
-        nh2 = normalize(t.get("h2", ""))
-        nh3 = normalize(t.get("h3", ""))
-        if len(parts) == 0:
+    target_parts = split_section_path(section_name)
+    if not target_parts:
+        return None
+
+    content = doc.get("body", {}).get("content", [])
+    candidates = []
+    for i, el in enumerate(content):
+        if "table" not in el:
             continue
-        if len(parts) == 1:
-            if parts[0] and parts[0] in nh1:
-                return t
-        elif len(parts) == 2:
-            if parts[0] and parts[0] in nh1 and parts[1] and parts[1] in nh2:
-                return t
-        else:
-            if parts[0] and parts[0] in nh1 and parts[1] and parts[1] in nh2 and parts[2] and parts[2] in nh3:
-                return t
+        h1 = h2 = h3 = ""
+        for j in range(i - 1, max(i - 100, -1), -1):
+            c = content[j]
+            if "paragraph" not in c:
+                continue
+            style = c["paragraph"].get("paragraphStyle", {})
+            named = style.get("namedStyleType", "")
+            txt = extract_paragraph_text(c)
+            if not txt:
+                continue
+            if named == "HEADING_3" and not h3:
+                h3 = txt
+            elif named == "HEADING_2" and not h2:
+                h2 = txt
+            elif named == "HEADING_1" and not h1:
+                h1 = txt
+            if h1 and h2 and h3:
+                break
+        candidates.append({"element": el, "index": i, "h1": h1, "h2": h2, "h3": h3})
+        print(f"[docs debug] found table with headings: h1={h1!r}, h2={h2!r}, h3={h3!r}")
 
-    m = re.search(r"\d+", section_name or "")
-    if m:
-        num = m.group(0)
-        for t in tables:
-            if re.search(rf"\b{re.escape(num)}\b", t.get("h1", "")):
-                return t
+    matches = []
+    for c in candidates:
+        parts = [normalize(c.get("h1", "")), normalize(c.get("h2", "")), normalize(c.get("h3", ""))]
+        parts = [p for p in parts if p]
+        if any(p in parts for p in target_parts):
+            matches.append(c)
 
-    if tables and DRY_RUN:
-        print("[docs debug] no exact heading match; available table headings:")
-        for t in tables:
-            print(f" - h1={t.get('h1')!r}, h2={t.get('h2')!r}, h3={t.get('h3')!r}")
+    if not matches:
+        if DRY_RUN:
+            print("[docs debug] no table matched DOC_SECTION; available heading paths:")
+            for c in candidates:
+                print(f" - h1={c.get('h1')!r}, h2={c.get('h2')!r}, h3={c.get('h3')!r}")
+        return None
 
-    return tables[0] if tables else None
+    if len(matches) > 1:
+        print("[docs warn] multiple tables matched DOC_SECTION path; selecting the first. Paths:")
+        for c in matches:
+            print(f" - h1={c.get('h1')!r}, h2={c.get('h2')!r}, h3={c.get('h3')!r}")
+    return matches[0]
 
 
 ## MODIFICATION: New function to read existing Problem URLs to avoid duplicates (since we no longer store Submission ID).
@@ -222,9 +275,9 @@ def get_existing_problem_urls(docs_service, doc_id: str, section: str) -> set:
         urls = set()
         for row in table_rows[1:]:  # skip header
             cells = row.get("tableCells", [])
-            if len(cells) < 6:
+            if len(cells) < 5:
                 continue
-            url_text = extract_cell_text(cells[5])  # 6th column
+            url_text = extract_cell_text(cells[4])  # 5th column
             if url_text:
                 urls.add(url_text.strip())
         print(f"[docs] Retrieved {len(urls)} existing problem URLs from the document.")
@@ -235,15 +288,36 @@ def get_existing_problem_urls(docs_service, doc_id: str, section: str) -> set:
     
 
 def getCodeAndTopic(problem_url: str):
-    # Extract topic from problem URL
-    problem_id = problem_url.split("/")[-1]
-    db = json.load(open("problem_topics.json", "r", encoding="utf-8")) # list of dicts
-    # convert db to dict for faster lookup
-    db = {item["title"]: [item["code"], item["sub_group"]] for item in db}
-    
-    if problem_id:
-        code, topic = db.get(problem_id, ["Unknown", "Unknown"])
-    return code, topic
+    """Return (number, code, topic) using problem_topics.json keyed by code like J03007."""
+    try:
+        code_key = (problem_url or '').rstrip('/').split('/')[-1]
+        db = json.load(open("problem_topics.json", "r", encoding="utf-8"))
+        by_code = {it["title"]: [it["code"], it["sub_group"]] for it in db}
+        number, topic = by_code.get(code_key, "Unknown")
+        return number, code_key, topic
+    except Exception:
+        return "", ""
+
+
+def make_batch_entry(item: Dict) -> Optional[Dict]:
+    """Build a JSON entry from a submission if it is AC + Java and has a numeric code."""
+    res = (item.get("result") or "").strip()
+    is_java = (item.get("compiler", "").strip().lower() == "java")
+    if res != "AC" or not is_java:
+        return None
+    url = item.get("problem_url") or ""
+    if not url:
+        return None
+    dt = try_parse_time(item.get("time_text") or "")
+    date_text = dt.strftime("%d-%m-%Y") if dt else (item.get("time_text") or "")
+    number, code, topic = getCodeAndTopic(url)
+    return {
+        "date": date_text,
+        "topic": topic,
+        "number": number,
+        "problem": item.get("problem") or "",
+        "result": res,
+    }
 
 
 def append_rows_and_fill_docs(doc_id: str, docs_service, table_element: Dict, rows_data: List[List[str]]):
@@ -257,16 +331,32 @@ def append_rows_and_fill_docs(doc_id: str, docs_service, table_element: Dict, ro
         print("[docs] table startIndex not available")
         return False
 
-    old_row_count = len(table.get("tableRows", []))
     num_to_add = len(rows_data)
-    if num_to_add == 0: 
+    if num_to_add == 0:
         return True
 
+    # Re-fetch current table state to avoid stale row count (especially after deletes)
+    try:
+        fresh_doc = docs_service.documents().get(documentId=doc_id).execute()
+        fresh_table_info = choose_table_by_section(fresh_doc, DOC_SECTION)
+        if fresh_table_info:
+            table = fresh_table_info.get("element", {}).get("table", table)
+            start_index = fresh_table_info.get("element", {}).get("startIndex", start_index)
+    except Exception as e:
+        print(f"[docs warn] could not refresh table before insert: {e}")
+
+    current_row_count = len(table.get("tableRows", []))
+    if current_row_count == 0:
+        print("[docs warn] table has zero rows (no header?) — cannot append.")
+        return False
+
+    # Always append after the last existing row (current_row_count - 1)
+    base_row_index = max(current_row_count - 1, 0)
     requests_payload = []
-    for _ in range(num_to_add):
+    for i in range(num_to_add):
         requests_payload.append({
             "insertTableRow": {
-                "tableCellLocation": {"tableStartLocation": {"index": start_index}, "rowIndex": old_row_count - 1},
+                "tableCellLocation": {"tableStartLocation": {"index": start_index}, "rowIndex": base_row_index + i},
                 "insertBelow": True,
             }
         })
@@ -326,6 +416,74 @@ def append_rows_and_fill_docs(doc_id: str, docs_service, table_element: Dict, ro
     return True
 
 
+def clear_table_body(doc_id: str, docs_service, section: str, max_attempts: int = 200) -> bool:
+    """Remove all rows except the header from the target table.
+    Deletes row index 1 repeatedly, refreshing the table each time to avoid stale indices.
+    """
+    attempts = 0
+    while True:
+        doc = docs_service.documents().get(documentId=doc_id).execute()
+        table_info = choose_table_by_section(doc, section)
+        if not table_info:
+            print(f"[docs error] Could not re-locate table for section '{section}' during clear.")
+            return False
+        table = table_info.get("element", {}).get("table", {})
+        start_index = table_info.get("element", {}).get("startIndex")
+        if not table or start_index is None:
+            print("[docs error] Table or startIndex missing during clear.")
+            return False
+
+        rows = len(table.get("tableRows", []))
+        if rows <= 1:
+            return True
+
+        req = [{
+            "deleteTableRow": {
+                "tableCellLocation": {
+                    "tableStartLocation": {"index": start_index},
+                    "rowIndex": 1,
+                }
+            }
+        }]
+        try:
+            docs_service.documents().batchUpdate(documentId=doc_id, body={"requests": req}).execute()
+            time.sleep(0.15)
+        except Exception as e:
+            attempts += 1
+            print(f"[docs warn] delete row attempt {attempts} failed: {e}")
+            time.sleep(0.3)
+            if attempts >= max_attempts:
+                print("[docs error] too many delete attempts; aborting clear.")
+                return False
+
+
+def rebuild_table_from_batch(doc_id: str, docs_service, section: str, batch: Dict[str, Dict]):
+    """Clear data rows and rebuild table from JSON entries.
+    Columns expected: date | topic | number | problem | result
+    """
+    if not clear_table_body(doc_id, docs_service, section):
+        return False
+
+    def date_key(s: str):
+        try:
+            return datetime.strptime(s, "%d-%m-%Y")
+        except Exception:
+            return datetime.min
+
+    items = list(batch.values())
+    items.sort(key=lambda it: (date_key(it.get("date", "01-01-1970")), int(it.get("number", "0"))), reverse=True)
+    rows = [[it.get("date", ""), it.get("topic", ""), it.get("number", ""), it.get("problem", ""), it.get("result", "")] for it in items]
+
+    # Re-fetch table info after clearing to ensure fresh metadata
+    doc = docs_service.documents().get(documentId=doc_id).execute()
+    table_info = choose_table_by_section(doc, section)
+    if not table_info:
+        print(f"[docs error] Could not find table for section '{section}' after clearing.")
+        return False
+
+    return append_rows_and_fill_docs(doc_id, docs_service, table_info, rows)
+
+
 
 def die(msg):
     raise SystemExit(f"[fatal] {msg}")
@@ -377,7 +535,6 @@ def get_cookie_string_auto():
         driver.find_element(By.CSS_SELECTOR, SUBMIT_SELECTOR).click()
         cookies = driver.get_cookies()
         cookie_string = "; ".join([f"{c['name']}={c['value']}" for c in cookies])
-        print(cookie_string)
         driver.quit()
         return cookie_string
     except Exception as e:
@@ -470,17 +627,7 @@ def sync():
         die("LIST_URL is empty")
     session = build_session()
     docs = None
-    existing_problem_urls = set()
-
-    if ENABLE_DOCS:
-        if not GOOGLE_DOC_ID:
-            die("ENABLE_DOCS is true but GOOGLE_DOC_ID is empty")
-        docs = get_docs_service()
-    print("[docs] Fetching existing problem URLs to prevent duplicates...")
-    existing_problem_urls = get_existing_problem_urls(docs, GOOGLE_DOC_ID, DOC_SECTION)
-    print(f"[docs] Found {len(existing_problem_urls)} existing rows in the document.")
-
-    new_rows_to_add = []
+    batch = load_batch()
     pages = [LIST_URL]
 
     if ENABLE_PAGINATION and MAX_PAGES > 1:
@@ -491,55 +638,32 @@ def sync():
         html = fetch_page(session, url)
         rows = parse_rows(html)
         print(f"[parse] found {len(rows)} rows")
-# The corrected code with the de-duplication check
         for item in rows:
-            res = (item.get("result") or "").strip()
-            isCompilerJava = (item.get("compiler", "").strip().lower() == "java")
-            problem_url = item.get("problem_url") or ""
+            entry = make_batch_entry(item)
+            if not entry:
+                continue
+            key = entry["number"]
+            if key not in batch:
+                batch[key] = entry
 
-            # This is the crucial new condition:
-            if res == "AC" and isCompilerJava and problem_url and problem_url not in existing_problem_urls:
-                
-                # This code will now only run for NEW, unique problems
-                dt = try_parse_time(item.get("time_text") or "")
-                submission_date = dt.strftime("%d-%m-%Y") if dt else (item.get("time_text") or "")
-                code, topic = getCodeAndTopic(problem_url) if problem_url else ("", "")
+    # DRY_RUN: fill JSON only
+    if DRY_RUN:
+        save_batch(batch)
+        print(f"[dry-run] JSON populated with {len(batch)} entries; Docs unchanged.")
+        return
 
-                row_data = [
-                    submission_date,
-                    topic,
-                    code,
-                    item.get("problem"),
-                    res,
-                    problem_url,
-                ]
-                new_rows_to_add.append(row_data)
-
-                # Add the URL to the set immediately to avoid duplicates within the same run
-                if problem_url:
-                    existing_problem_urls.add(problem_url)
-    print(f"[sync] Found {len(new_rows_to_add)} new submissions to add.")
-
-    # After checking all pages, add all new rows in a single batch operation.
-    if new_rows_to_add:
-        # Reverse the list so the newest submissions are added first.
-        new_rows_to_add.reverse()
-        if DRY_RUN or not ENABLE_DOCS:
-            for row in new_rows_to_add:
-                print("[dry-run] would append:", row)
+    # Non-dry: update JSON and rebuild Docs from JSON
+    save_batch(batch)
+    if ENABLE_DOCS:
+        if not GOOGLE_DOC_ID:
+            die("ENABLE_DOCS is true but GOOGLE_DOC_ID is empty")
+        docs = get_docs_service()
+        if rebuild_table_from_batch(GOOGLE_DOC_ID, docs, DOC_SECTION, batch):
+            print("[docs] Table rebuilt from JSON.")
         else:
-            try:
-                print(f"[docs] Appending {len(new_rows_to_add)} rows to the table (columns: time | topic | problem | result | url)...")
-                doc = docs.documents().get(documentId=GOOGLE_DOC_ID).execute()
-                table_info = choose_table_by_section(doc, DOC_SECTION)
-                if table_info:
-                    append_rows_and_fill_docs(GOOGLE_DOC_ID, docs, table_info, new_rows_to_add)
-                else:
-                    print(f"[docs error] Could not find the target table section '{DOC_SECTION}'.")
-            except Exception as e:
-                print(f"[docs error] failed to append rows: {e}")
-
-    print(f"[done] Processed {len(new_rows_to_add)} new submissions.")
+            die(f"Failed to locate or rebuild table for section '{DOC_SECTION}'.")
+    else:
+        print("[info] ENABLE_DOCS=false; JSON updated but Docs not modified.")
 
 # 2332323232
 if __name__ == "__main__":

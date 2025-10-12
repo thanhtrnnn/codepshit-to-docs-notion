@@ -1,0 +1,590 @@
+{
+  "192": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "192",
+    "problem": "LIỆT KÊ NHÂN VIÊN THEO CHỨC VỤ",
+    "result": "AC"
+  },
+  "191": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "191",
+    "problem": "TÍNH THU NHẬP CHO NHÂN VIÊN",
+    "result": "AC"
+  },
+  "190": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "190",
+    "problem": "BẢNG XẾP HẠNG",
+    "result": "AC"
+  },
+  "189": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "189",
+    "problem": "SẮP XẾP BẢNG TÍNH CÔNG",
+    "result": "AC"
+  },
+  "188": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "188",
+    "problem": "LẬP BẢNG TÍNH CÔNG",
+    "result": "AC"
+  },
+  "187": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "187",
+    "problem": "BẢNG KÊ TIỀN LƯƠNG",
+    "result": "AC"
+  },
+  "186": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "186",
+    "problem": "TÍNH GIÁ BÁN - 2",
+    "result": "AC"
+  },
+  "185": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "185",
+    "problem": "TÍNH GIÁ BÁN - 1",
+    "result": "AC"
+  },
+  "184": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "184",
+    "problem": "DANH SÁCH THỰC TẬP - 2",
+    "result": "AC"
+  },
+  "183": {
+    "date": "04-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "183",
+    "problem": "DANH SÁCH THỰC TẬP - 1",
+    "result": "AC"
+  },
+  "182": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "182",
+    "problem": "TRẺ NHẤT – GIÀ NHẤT",
+    "result": "AC"
+  },
+  "181": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "181",
+    "problem": "BẢNG ĐIỂM THÀNH PHẦN - 2",
+    "result": "AC"
+  },
+  "180": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "180",
+    "problem": "BẢNG ĐIỂM THÀNH PHẦN - 1",
+    "result": "AC"
+  },
+  "172": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "172",
+    "problem": "LIỆT KÊ SINH VIÊN THEO LỚP",
+    "result": "AC"
+  },
+  "179": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "179",
+    "problem": "DANH SÁCH DOANH NGHIỆP NHẬN SINH VIÊN THỰC TẬP - 2",
+    "result": "AC"
+  },
+  "178": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "178",
+    "problem": "DANH SÁCH DOANH NGHIỆP NHẬN SINH VIÊN THỰC TẬP - 1",
+    "result": "AC"
+  },
+  "177": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "177",
+    "problem": "TÌM KIẾM GIẢNG VIÊN",
+    "result": "AC"
+  },
+  "176": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "176",
+    "problem": "DANH SÁCH GIẢNG VIÊN THEO BỘ MÔN",
+    "result": "AC"
+  },
+  "175": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "175",
+    "problem": "SẮP XẾP DANH SÁCH GIẢNG VIÊN",
+    "result": "AC"
+  },
+  "174": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "174",
+    "problem": "LIỆT KÊ SINH VIÊN THEO NGÀNH",
+    "result": "AC"
+  },
+  "173": {
+    "date": "02-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "173",
+    "problem": "LIỆT KÊ SINH VIÊN THEO KHÓA",
+    "result": "AC"
+  },
+  "171": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "171",
+    "problem": "SẮP XẾP THEO MÃ SINH VIÊN",
+    "result": "AC"
+  },
+  "170": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "170",
+    "problem": "SẮP XẾP SINH VIÊN THEO LỚP",
+    "result": "AC"
+  },
+  "169": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "169",
+    "problem": "BẢNG ĐIỂM HỌC SINH",
+    "result": "AC"
+  },
+  "168": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "168",
+    "problem": "TÍNH GIỜ",
+    "result": "AC"
+  },
+  "167": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "167",
+    "problem": "SẮP XẾP DANH SÁCH MẶT HÀNG",
+    "result": "AC"
+  },
+  "153": {
+    "date": "01-10-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "153",
+    "problem": "BÀI TOÁN TÍNH CÔNG",
+    "result": "AC"
+  },
+  "166": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "166",
+    "problem": "TÌM THỦ KHOA CỦA KỲ THI",
+    "result": "AC"
+  },
+  "164": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "164",
+    "problem": "DANH SÁCH ĐỐI TƯỢNG NHÂN VIÊN",
+    "result": "AC"
+  },
+  "165": {
+    "date": "01-10-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "165",
+    "problem": "SẮP XẾP DANH SÁCH ĐỐI TƯỢNG NHÂN VIÊN",
+    "result": "AC"
+  },
+  "163": {
+    "date": "30-09-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "163",
+    "problem": "DANH SÁCH ĐỐI TƯỢNG SINH VIÊN - 3",
+    "result": "AC"
+  },
+  "162": {
+    "date": "30-09-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "162",
+    "problem": "DANH SÁCH ĐỐI TƯỢNG SINH VIÊN - 2",
+    "result": "AC"
+  },
+  "161": {
+    "date": "30-09-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "161",
+    "problem": "DANH SÁCH ĐỐI TƯỢNG SINH VIÊN - 1",
+    "result": "AC"
+  },
+  "160": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "160",
+    "problem": "WORDSET",
+    "result": "AC"
+  },
+  "159": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "159",
+    "problem": "LỚP INTSET",
+    "result": "AC"
+  },
+  "158": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "158",
+    "problem": "LỚP PAIR",
+    "result": "AC"
+  },
+  "157": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "157",
+    "problem": "LỚP TRIANGLE - 1",
+    "result": "AC"
+  },
+  "156": {
+    "date": "30-09-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "156",
+    "problem": "SỐ PHỨC",
+    "result": "AC"
+  },
+  "155": {
+    "date": "30-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "155",
+    "problem": "TÍNH TOÁN PHÂN SỐ",
+    "result": "AC"
+  },
+  "154": {
+    "date": "25-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "154",
+    "problem": "BÀI TOÁN TUYỂN SINH",
+    "result": "AC"
+  },
+  "151": {
+    "date": "25-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "151",
+    "problem": "DIỆN TÍCH HÌNH TRÒN NGOẠI TIẾP TAM GIÁC",
+    "result": "AC"
+  },
+  "150": {
+    "date": "25-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "150",
+    "problem": "DIỆN TÍCH TAM GIÁC",
+    "result": "AC"
+  },
+  "109": {
+    "date": "25-09-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "109",
+    "problem": "DANH SÁCH MÔN THI",
+    "result": "AC"
+  },
+  "80": {
+    "date": "18-09-2025",
+    "topic": "VÀO RA FILE",
+    "number": "80",
+    "problem": "SỐ KHÁC NHAU TRONG FILE  - 1",
+    "result": "AC"
+  },
+  "78": {
+    "date": "18-09-2025",
+    "topic": "VÀO RA FILE",
+    "number": "78",
+    "problem": "TÍNH TỔNG",
+    "result": "AC"
+  },
+  "77": {
+    "date": "18-09-2025",
+    "topic": "VÀO RA FILE",
+    "number": "77",
+    "problem": "ĐỌC FILE VĂN BẢN",
+    "result": "AC"
+  },
+  "64": {
+    "date": "14-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "64",
+    "problem": "CHIA HẾT",
+    "result": "AC"
+  },
+  "148": {
+    "date": "11-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "148",
+    "problem": "XÂU ĐẦY ĐỦ",
+    "result": "AC"
+  },
+  "146": {
+    "date": "11-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "146",
+    "problem": "SỐ LA MÃ",
+    "result": "AC"
+  },
+  "145": {
+    "date": "11-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "145",
+    "problem": "XỬ LÝ VĂN BẢN",
+    "result": "AC"
+  },
+  "139": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "139",
+    "problem": "MA TRẬN XOẮN ỐC TĂNG DẦN",
+    "result": "AC"
+  },
+  "135": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "135",
+    "problem": "QUAY PHẢI",
+    "result": "AC"
+  },
+  "132": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "132",
+    "problem": "DÃY CON CÓ K PHẦN TỬ TĂNG DẦN",
+    "result": "AC"
+  },
+  "130": {
+    "date": "06-09-2025",
+    "topic": "MẢNG",
+    "number": "130",
+    "problem": "DÃY CON CÓ TỔNG LẺ",
+    "result": "AC"
+  },
+  "126": {
+    "date": "06-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "126",
+    "problem": "GÕ BÀN PHÍM",
+    "result": "AC"
+  },
+  "125": {
+    "date": "06-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "125",
+    "problem": "ĐẦU TƯ  CHỨNG KHOÁN",
+    "result": "AC"
+  },
+  "131": {
+    "date": "04-09-2025",
+    "topic": "MẢNG",
+    "number": "131",
+    "problem": "DÃY CON CÓ TỔNG NGUYÊN TỐ",
+    "result": "AC"
+  },
+  "127": {
+    "date": "04-09-2025",
+    "topic": "MẢNG",
+    "number": "127",
+    "problem": "XẾP HÀNG",
+    "result": "AC"
+  },
+  "144": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "144",
+    "problem": "TÌM TỪ THUẬN NGHỊCH DÀI NHẤT",
+    "result": "AC"
+  },
+  "142": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "142",
+    "problem": "CHIA HẾT CHO 11",
+    "result": "AC"
+  },
+  "141": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "141",
+    "problem": "TỔNG SỐ NGUYÊN LỚN - 2",
+    "result": "AC"
+  },
+  "140": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "140",
+    "problem": "TỔNG SỐ NGUYÊN LỚN - 1",
+    "result": "AC"
+  },
+  "138": {
+    "date": "04-09-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "138",
+    "problem": "DÃY ƯU THẾ",
+    "result": "AC"
+  },
+  "128": {
+    "date": "04-09-2025",
+    "topic": "MẢNG",
+    "number": "128",
+    "problem": "BỘ BA SỐ PYTAGO",
+    "result": "AC"
+  },
+  "122": {
+    "date": "04-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "122",
+    "problem": "PHẦN TỬ BÊN PHẢI ĐẦU TIÊN LỚN HƠN",
+    "result": "AC"
+  },
+  "121": {
+    "date": "04-09-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "121",
+    "problem": "DÃY NGOẶC ĐÚNG DÀI NHẤT",
+    "result": "AC"
+  },
+  "120": {
+    "date": "23-08-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "120",
+    "problem": "KIỂM TRA DÃY NGOẶC ĐÚNG",
+    "result": "AC"
+  },
+  "118": {
+    "date": "23-08-2025",
+    "topic": "ỨNG DỤNG JAVA COLLECTION",
+    "number": "118",
+    "problem": "HÌNH SAO",
+    "result": "AC"
+  },
+  "76": {
+    "date": "23-08-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "76",
+    "problem": "DANH SÁCH MẶT HÀNG",
+    "result": "AC"
+  },
+  "75": {
+    "date": "23-08-2025",
+    "topic": "MẢNG ĐỐI TƯỢNG",
+    "number": "75",
+    "problem": "SẮP XẾP THỜI GIAN",
+    "result": "AC"
+  },
+  "74": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "74",
+    "problem": "TÍNH THU NHẬP GIÁO VIÊN",
+    "result": "AC"
+  },
+  "73": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "73",
+    "problem": "CHU VI TAM GIÁC",
+    "result": "AC"
+  },
+  "72": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "72",
+    "problem": "KHAI BÁO LỚP NHÂN VIÊN",
+    "result": "AC"
+  },
+  "71": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "71",
+    "problem": "KHAI BÁO LỚP SINH VIÊN",
+    "result": "AC"
+  },
+  "70": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "70",
+    "problem": "KHAI BÁO LỚP THÍ SINH",
+    "result": "AC"
+  },
+  "69": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "69",
+    "problem": "TỔNG PHÂN SỐ",
+    "result": "AC"
+  },
+  "68": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "68",
+    "problem": "PHÂN SỐ",
+    "result": "AC"
+  },
+  "67": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "67",
+    "problem": "KHAI BÁO LỚP HÌNH CHỮ NHẬT",
+    "result": "AC"
+  },
+  "66": {
+    "date": "22-08-2025",
+    "topic": "KHAI BÁO LỚP VÀ ĐỐI TƯỢNG",
+    "number": "66",
+    "problem": "KHAI BÁO LỚP POINT",
+    "result": "AC"
+  },
+  "65": {
+    "date": "22-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "65",
+    "problem": "BIỂN SỐ ĐẸP",
+    "result": "AC"
+  },
+  "63": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "63",
+    "problem": "ĐÁNH DẤU CHỮ CÁI",
+    "result": "AC"
+  },
+  "61": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "61",
+    "problem": "ĐẢO TỪ",
+    "result": "AC"
+  },
+  "60": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "60",
+    "problem": "RÚT GỌN XÂU KÝ TỰ",
+    "result": "AC"
+  },
+  "59": {
+    "date": "21-08-2025",
+    "topic": "XÂU KÝ TỰ",
+    "number": "59",
+    "problem": "XÂU KHÁC NHAU DÀI NHẤT",
+    "result": "AC"
+  }
+}

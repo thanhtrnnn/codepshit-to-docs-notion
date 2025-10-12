@@ -1,8 +1,11 @@
 *.env
-*.json
+envs/
+gen-lang-*.json
 *.log
 .venv/
 *.venv/
 __pycache__/
 *.pyc
 *.pyo
+export_problem_topics.py
+test_docs_auth.py
