@@ -25,6 +25,9 @@ jobs:
         
     - name: Install Chrome and ChromeDriver
       uses: browser-actions/setup-chrome@v1
+
+    - name: Check DNS resolution
+      run: nslookup code.ptit.edu.vn
       
     - name: Step 1 - Scrape submissions (DRY_RUN=true)
       env:
