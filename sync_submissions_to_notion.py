@@ -173,7 +173,7 @@ def make_page_url(base_url, page_index):
     return urllib.parse.urlunparse(parts)
 
 
-def parse_rows(html: str):
+def parse_rows(html: str, base_url: str):
     soup = BeautifulSoup(html, "html.parser")
     rows = soup.select(ROW_SELECTOR)
     out = []
@@ -212,7 +212,7 @@ def parse_rows(html: str):
         if prob_cell:
             a = prob_cell.select_one(PROBLEM_LINK_SELECTOR) or prob_cell.find("a")
             if a and a.has_attr("href"):
-                prob_url = urllib.parse.urljoin(LIST_URL, a["href"])
+                prob_url = urllib.parse.urljoin(base_url, a["href"])
 
         # Skip empty rows
         if not sid and not prob_text:
@@ -331,7 +331,7 @@ def sync():
     for url in pages:
         print(f"[fetch] {url}")
         html = fetch_page(session, url)
-        rows = parse_rows(html)
+        rows = parse_rows(html, LIST_URL)
         print(f"[parse] found {len(rows)} rows")
         for item in rows:
             ok = upsert_submission(notion, item)
