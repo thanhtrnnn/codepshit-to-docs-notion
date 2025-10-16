@@ -27,7 +27,7 @@ jobs:
       uses: browser-actions/setup-chrome@v1
 
     - name: Check DNS resolution
-      run: nslookup code.ptit.edu.vn
+      run: nslookup code.ptit.edu.vn 8.8.8.8
       
     - name: Step 1 - Scrape submissions (DRY_RUN=true)
       env:
