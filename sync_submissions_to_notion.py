@@ -32,7 +32,9 @@ import os, time, re, json, urllib.parse, requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+from typing import Optional
+from functools import lru_cache
 from bs4 import BeautifulSoup
 from notion_client import Client, APIResponseError
 import dns.resolver
@@ -83,6 +85,31 @@ TIME_FORMATS = [
     "%d/%m/%Y %H:%M:%S",
 ]
 
+TARGET_TZ = timezone(timedelta(hours=7))
+TIME_SOURCE_URL = os.getenv("TIME_SOURCE_URL", "https://worldtimeapi.org/api/timezone/Etc/UTC")
+
+
+@lru_cache(maxsize=1)
+def get_local_timezone() -> timezone:
+    try:
+        resp = requests.get(TIME_SOURCE_URL, timeout=5)
+        resp.raise_for_status()
+        data = resp.json()
+        remote_iso = data.get("datetime")
+        if remote_iso:
+            remote_dt = datetime.fromisoformat(remote_iso.replace("Z", "+00:00"))
+            remote_dt = remote_dt.astimezone(timezone.utc).replace(tzinfo=None)
+        else:
+            remote_dt = datetime.utcnow()
+    except Exception:
+        remote_dt = datetime.utcnow()
+
+    local_now = datetime.now()
+    offset = local_now - remote_dt
+    offset_minutes = int(round(offset.total_seconds() / 60))
+    offset_minutes = max(min(offset_minutes, 14 * 60), -12 * 60)
+    return timezone(timedelta(minutes=offset_minutes))
+
 
 def die(msg):
     raise SystemExit(f"[fatal] {msg}")
@@ -123,6 +150,17 @@ def try_parse_time(s):
         except Exception:
             pass
     return None
+
+
+def convert_to_gmt7(dt: Optional[datetime]) -> Optional[datetime]:
+    if dt is None:
+        return None
+    local_tz = get_local_timezone()
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=local_tz)
+    else:
+        dt = dt.astimezone(local_tz)
+    return dt.astimezone(TARGET_TZ)
 
 
 def get_cookie_string_auto():
@@ -323,9 +361,10 @@ def upsert_submission(notion: Client, item: dict):
 
     # Submission time (date)
     dt = try_parse_time(item.get("time_text") or "")
-    if dt:
+    dt_gmt7 = convert_to_gmt7(dt)
+    if dt_gmt7:
         # Notion expects ISO8601
-        props["Submission time"] = {"date": {"start": dt.isoformat()}}
+        props["Submission time"] = {"date": {"start": dt_gmt7.isoformat()}}
 
     try:
         # existing = ignore submission duplicate problem/ already in database cases

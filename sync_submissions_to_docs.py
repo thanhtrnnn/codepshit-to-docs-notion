@@ -30,8 +30,9 @@ import os, time, re, json, urllib.parse, requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from bs4 import BeautifulSoup
+from functools import lru_cache
 import dns.resolver
 
 # Optional Google Docs integration
@@ -97,6 +98,34 @@ DOC_SCOPES = [
     "https://www.googleapis.com/auth/documents",
     "https://www.googleapis.com/auth/drive.file",
 ]
+
+TARGET_TZ = timezone(timedelta(hours=7))
+TIME_SOURCE_URL = os.getenv("TIME_SOURCE_URL", "https://worldtimeapi.org/api/timezone/Etc/UTC")
+
+
+@lru_cache(maxsize=1)
+def get_local_timezone() -> timezone:
+    try:
+        resp = requests.get(TIME_SOURCE_URL, timeout=5)
+        resp.raise_for_status()
+        data = resp.json()
+        remote_iso = data.get("datetime")
+        if remote_iso:
+            remote_dt = datetime.fromisoformat(remote_iso.replace("Z", "+00:00"))
+            remote_dt = remote_dt.astimezone(timezone.utc).replace(tzinfo=None)
+        else:
+            remote_dt = datetime.utcnow()
+    except Exception as e:
+        remote_dt = datetime.utcnow()
+
+    local_now = datetime.now()
+    offset = local_now - remote_dt
+    offset_minutes = int(round(offset.total_seconds() / 60))
+    # Clamp to plausible timezone range (-12h to +14h)
+    offset_minutes = max(min(offset_minutes, 14 * 60), -12 * 60)
+    return timezone(timedelta(minutes=offset_minutes))
+
+TARGET_TZ = timezone(timedelta(hours=7))
 
 
 def get_docs_service():
@@ -310,7 +339,8 @@ def make_batch_entry(item: Dict) -> Optional[Dict]:
     if not url:
         return None
     dt = try_parse_time(item.get("time_text") or "")
-    date_text = dt.strftime("%d-%m-%Y") if dt else (item.get("time_text") or "")
+    dt_gmt7 = convert_to_gmt7(dt)
+    date_text = dt_gmt7.strftime("%d-%m-%Y") if dt_gmt7 else (item.get("time_text") or "")
     number, code, topic = getCodeAndTopic(url)
     return {
         "date": date_text,
@@ -523,6 +553,17 @@ def try_parse_time(s):
         except Exception:
             pass
     return None
+
+
+def convert_to_gmt7(dt: Optional[datetime]) -> Optional[datetime]:
+    if dt is None:
+        return None
+    local_tz = get_local_timezone()
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=local_tz)
+    else:
+        dt = dt.astimezone(local_tz)
+    return dt.astimezone(TARGET_TZ)
 
 
 def get_cookie_string_auto():
