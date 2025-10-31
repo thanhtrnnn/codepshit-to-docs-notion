@@ -35,6 +35,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from bs4 import BeautifulSoup
 from notion_client import Client, APIResponseError
+import dns.resolver
 
 # ----------------------
 # Config via env vars
@@ -159,7 +160,30 @@ def build_session():
 
 
 def fetch_page(session: requests.Session, url: str):
-    r = session.get(url, timeout=30)
+    # Parse URL to get hostname
+    parsed = urllib.parse.urlparse(url)
+    hostname = parsed.hostname
+    
+    # Use custom DNS resolver with 8.8.8.8
+    resolver = dns.resolver.Resolver()
+    resolver.nameservers = ['8.8.8.8']
+    
+    try:
+        # Resolve hostname using 8.8.8.8
+        answers = resolver.resolve(hostname, 'A')
+        ip_address = str(answers[0])
+        
+        # Replace hostname with resolved IP in URL
+        url_with_ip = url.replace(hostname, ip_address)
+        
+        # Make request with resolved IP, but keep original hostname in Host header
+        headers = {'Host': hostname}
+        r = session.get(url_with_ip, headers=headers, timeout=30)
+    except Exception as e:
+        # Fallback to original URL if DNS resolution fails
+        print(f"[dns] DNS resolution failed for {hostname}: {e}, using original URL")
+        r = session.get(url, timeout=30)
+    
     r.raise_for_status()
     return r.text
 
@@ -173,7 +197,7 @@ def make_page_url(base_url, page_index):
     return urllib.parse.urlunparse(parts)
 
 
-def parse_rows(html: str):
+def parse_rows(html: str, base_url: str):
     soup = BeautifulSoup(html, "html.parser")
     rows = soup.select(ROW_SELECTOR)
     out = []
@@ -212,7 +236,7 @@ def parse_rows(html: str):
         if prob_cell:
             a = prob_cell.select_one(PROBLEM_LINK_SELECTOR) or prob_cell.find("a")
             if a and a.has_attr("href"):
-                prob_url = urllib.parse.urljoin(LIST_URL, a["href"])
+                prob_url = urllib.parse.urljoin(base_url, a["href"])
 
         # Skip empty rows
         if not sid and not prob_text:
@@ -331,7 +355,7 @@ def sync():
     for url in pages:
         print(f"[fetch] {url}")
         html = fetch_page(session, url)
-        rows = parse_rows(html)
+        rows = parse_rows(html, LIST_URL)
         print(f"[parse] found {len(rows)} rows")
         for item in rows:
             ok = upsert_submission(notion, item)
