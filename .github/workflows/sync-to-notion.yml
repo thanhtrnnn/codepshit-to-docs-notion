@@ -33,8 +33,8 @@ jobs:
         LIST_URL: ${{ secrets.LIST_URL }}
         AUTO_LOGIN: ${{ secrets.AUTO_LOGIN }}
         LOGIN_URL: ${{ secrets.LOGIN_URL }}
-        LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
-        LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+        LOGIN_USERNAME_THANH: ${{ secrets.LOGIN_USERNAME_THANH }}
+        LOGIN_PASSWORD_THANH: ${{ secrets.LOGIN_PASSWORD_THANH }}
         USERNAME_SELECTOR: ${{ secrets.USERNAME_SELECTOR }}
         PASSWORD_SELECTOR: ${{ secrets.PASSWORD_SELECTOR }}
         SUBMIT_SELECTOR: ${{ secrets.SUBMIT_SELECTOR }}
